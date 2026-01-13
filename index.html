@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Workspace Admin Quiz</title>
+    <title>Workspace Admin Master Quiz (Full Verbatim)</title>
     <style>
         :root {
-            --primary: #1a73e8; /* Google Blue */
-            --success: #1e8e3e; /* Google Green */
-            --error: #d93025;   /* Google Red */
+            --primary: #1a73e8;
+            --success: #1e8e3e;
+            --error: #d93025;
             --bg-color: #f0f2f5;
             --card-bg: #ffffff;
             --text-color: #202124;
@@ -24,6 +24,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            padding-bottom: 50px;
         }
 
         header {
@@ -40,7 +41,7 @@
             box-sizing: border-box;
         }
 
-        h1 { margin: 0; font-size: 1.3rem; color: #5f6368; }
+        h1 { margin: 0; font-size: 1.2rem; color: #5f6368; }
         
         .score-pill {
             background: #e8f0fe;
@@ -53,7 +54,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 0 15px;
             box-sizing: border-box;
@@ -65,7 +66,6 @@
             box-shadow: var(--shadow);
             padding: 30px;
             margin-bottom: 20px;
-            transition: all 0.3s ease;
         }
 
         .q-header {
@@ -79,31 +79,41 @@
             letter-spacing: 0.5px;
         }
 
+        .instruction {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
         .q-text {
             font-size: 1.1rem;
-            line-height: 1.5;
+            line-height: 1.6;
             margin-bottom: 25px;
             color: #202124;
-            white-space: pre-wrap;
+            font-weight: 500;
         }
 
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .option-btn {
             background: #fff;
             border: 1px solid #dadce0;
-            border-radius: 4px;
-            padding: 12px 16px;
+            border-radius: 6px;
+            padding: 15px;
             text-align: left;
             cursor: pointer;
             font-size: 0.95rem;
             color: #3c4043;
             transition: all 0.2s;
-            position: relative;
+            line-height: 1.4;
+            display: flex;
+            align-items: flex-start;
         }
 
         .option-btn:hover:not(:disabled) {
@@ -111,19 +121,24 @@
             border-color: #80868b;
         }
 
+        .option-letter {
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 20px;
+        }
+
         /* Selection States */
         .option-btn.selected {
             background-color: #e8f0fe;
             border-color: var(--primary);
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .option-btn.correct {
             background-color: #ceead6;
             border-color: var(--success);
             color: #0d652d;
-            font-weight: 500;
         }
 
         .option-btn.wrong {
@@ -134,13 +149,12 @@
 
         .option-btn:disabled {
             cursor: default;
-            opacity: 1; 
         }
 
         /* Feedback Area */
         .feedback {
             margin-top: 25px;
-            padding: 15px;
+            padding: 20px;
             background: #f8f9fa;
             border-radius: 8px;
             border-left: 5px solid #ccc;
@@ -156,17 +170,18 @@
         .feedback.correct { border-left-color: var(--success); background-color: #f6ffed; }
         .feedback.wrong { border-left-color: var(--error); background-color: #fff2f0; }
 
-        .fb-title { font-weight: bold; margin-bottom: 5px; display: block; }
-        .fb-expl { font-size: 0.9rem; color: #444; line-height: 1.5; }
+        .fb-title { font-weight: bold; margin-bottom: 8px; display: block; font-size: 1.1rem; }
+        .fb-expl { font-size: 0.95rem; color: #444; line-height: 1.6; }
 
         /* Next Button */
         .next-btn {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 12px 24px;
             border-radius: 4px;
             font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
             margin-top: 20px;
             float: right;
@@ -175,37 +190,32 @@
         .next-btn:hover { background-color: #174ea6; }
 
         /* End Screen */
-        .end-screen { text-align: center; display: none; }
-        .score-big { font-size: 3rem; font-weight: bold; color: var(--primary); margin: 20px 0; }
+        .end-screen { text-align: center; display: none; padding: 40px; }
+        .score-big { font-size: 4rem; font-weight: bold; color: var(--primary); margin: 20px 0; }
         .restart-btn {
             background: white;
-            border: 1px solid #dadce0;
-            padding: 10px 20px;
-            border-radius: 4px;
+            border: 2px solid #dadce0;
+            padding: 12px 30px;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
             color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 20px;
         }
-        .restart-btn:hover { background: #f1f3f4; }
+        .restart-btn:hover { background: #f1f3f4; border-color: var(--primary); }
         
-        .instruction {
-            font-size: 0.85rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
         @media (max-width: 600px) {
             .card { padding: 20px; }
-            h1 { font-size: 1.1rem; }
+            h1 { font-size: 1rem; }
+            .option-btn { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Workspace Master Quiz</h1>
+    <h1>Workspace Master Quiz (Full)</h1>
     <div class="score-pill">Score: <span id="score">0</span></div>
 </header>
 
@@ -213,7 +223,7 @@
     <div class="card" id="quiz-card">
         <div class="q-header">
             <span id="progress">Question 1</span>
-            <span id="q-id">ID: 001</span>
+            <span id="q-id">ID: 1</span>
         </div>
 
         <div class="instruction" id="instruction"></div>
@@ -225,7 +235,7 @@
             <div class="fb-expl" id="fb-expl"></div>
         </div>
 
-        <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question</button>
+        <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question &#8594;</button>
         <div style="clear:both;"></div>
     </div>
 
@@ -234,103 +244,1070 @@
         <p>Your final score:</p>
         <div class="score-big" id="final-score"></div>
         <p id="final-stats"></p>
-        <button class="restart-btn" onclick="startQuiz()">Restart Quiz</button>
+        <button class="restart-btn" onclick="startQuiz()">Shuffle & Restart</button>
     </div>
 </div>
 
 <script>
-    // --- MERGED DATA SOURCE (Untitled + Workspace_Exam) ---
+    // --- FULL VERBATIM DATA SOURCE ---
     const rawDeck = [
-        // Questions 1-72 from Untitled Document
-        { id: 1, q: "Audit requiring preservation of all communications (Email, Chat, Drive) for a specific project. How to configure Vault?", options: ["A. Security investigation report", "B. Search and export", "C. Create a matter and a hold on all project-related data sources", "D. Custom retention policy"], a: ["C"], expl: "Holds are required to preserve data indefinitely for legal discovery, overriding retention rules." },
-        { id: 2, q: "Need confidential group for finance project. Minimize management overhead. What to do?", options: ["A. GCDS sync", "B. Dynamic group based on Department attribute (Finance)", "C. Open group", "D. Group with admin"], a: ["B"], expl: "Dynamic groups automate membership based on attributes like Department, reducing overhead." },
-        { id: 3, q: "Signed up for Business Starter with existing domain. Cannot create users or change settings. What to do?", options: ["A. Transfer tool", "B. Check domain ownership in DNS settings", "C. Wait 24h", "D. Upgrade"], a: ["B"], expl: "Domain verification is required to unlock full admin features." },
-        { id: 4, q: "Temp employees left. Need to disable accounts but preserve Vault data for 2 years. Minimize cost.", options: ["A. Archived User (AU) licenses", "B. Transfer files and delete", "C. Suspend and keep license", "D. Move to OU and disable"], a: ["A"], expl: "AU licenses preserve Vault data at a fraction of the cost of full licenses." },
-        { id: 5, q: "Legal needs specific M&A emails from employee on leave. Ensure privacy.", options: ["A. IT forwards emails", "B. Legal access to account", "C. Delegate access", "D. Vault matter > Search > Export > Share"], a: ["D"], expl: "Vault allows targeted search/export for legal needs without granting full mailbox access." },
-        { id: 6, q: "Prevent unauthorized forwarding of internal newsletter to external addresses. Allow internal sharing.", options: ["A. Warning banner", "B. Gmail content compliance rule targeting newsletter to reject external forwarding", "C. Apps Script", "D. Subject line modification"], a: ["B"], expl: "Content compliance rules can filter based on content and recipient (internal vs external)." },
-        { id: 7, q: "Ensure sensitive project data in Drive is limited to internal sharing only. Not overly restrictive.", options: ["A. Domain internal only", "B. Allowlisted domains", "C. Drive DLP rule using Project Name as detector", "D. Turn off sharing"], a: ["C"], expl: "DLP allows specific content-based restrictions rather than blanket domain blocks." },
-        { id: 8, q: "Users received phishing from fake HR. Identify recipients and prevent recurrence.", options: ["A. Email Log Search", "B. Mark phishing in Investigation Tool + Block sender", "C. Vault export", "D. Investigation Tool > Delete messages > Turn on spoofing/auth safety settings"], a: ["D"], expl: "Investigation tool deletes the bad emails; Safety settings prevent future spoofing." },
-        { id: 9, q: "Make prototype room bookable by Innovation and Sales Directors only.", options: ["A. Groups + Share Calendar", "B. Separate resource", "C. Calendar Resource > Adjust permission settings to specific groups", "D. Calendar Event"], a: ["C"], expl: "Resource permissions control who can book specific rooms." },
-        { id: 10, q: "Notify compliance team when user updates/resets password.", options: ["A. Activity rule triggered by Password Changed event", "B. Password policy", "C. Alert center", "D. Compliance OU"], a: ["A"], expl: "Activity rules allow automated alerts for specific audit events." },
-        { id: 11, q: "Prevent access to malicious external Drive files, allow legitimate ones. (Choose two)", options: ["A. Security awareness training", "B. Malware detection", "C. Password policy", "D. Drive trust rule blocking all external except allowed partners"], a: ["A", "D"], expl: "Trust rules whitelist partners; Training helps users identify risks." },
-        { id: 12, q: "Cost-effective customer support email, requests evenly distributed.", options: ["A. Google Group (Collaborative Inbox) with 'Anyone on web' posting", "B. Shared credentials", "C. Public group", "D. Delegated access"], a: ["A"], expl: "Collaborative inboxes allow assignment/tracking without shared passwords." },
-        { id: 13, q: "Legitimate external emails going to spam. Fix without risk.", options: ["A. DMARC", "B. Spam settings > Add sender IPs to email allowlist", "C. Address list", "D. Mark as not spam"], a: ["B"], expl: "IP Allowlisting bypasses spam filters for trusted sources." },
-        { id: 14, q: "Allow security team to use Investigation Tool. Least privilege.", options: ["A. Admin role with Security Center access", "B. User Mgmt role", "C. Activity rule", "D. Super Admin"], a: ["A"], expl: "Custom role with specific Security Center rights avoids Super Admin risks." },
-        { id: 15, q: "Preserve project communications for audit (Repeat of Q1).", options: ["A. Report", "B. Retention policy", "C. Matter and Hold", "D. Search export"], a: ["C"], expl: "Holds are for indefinite preservation." },
-        { id: 16, q: "Web/mobile approval app, no dev budget.", options: ["A. AppSheet", "B. Internal dev", "C. Apps Script", "D. Manual"], a: ["A"], expl: "AppSheet is the no-code solution for Workspace." },
-        { id: 17, q: "Automatically classify Drive files based on content.", options: ["A. 3rd party", "B. OU defaults", "C. Drive DLP rules applying labels", "D. Manual labels"], a: ["C"], expl: "DLP can scan content (like PII) and auto-apply labels." },
-        { id: 18, q: "Create many conference rooms efficiently.", options: ["A. Individually", "B. 3rd party", "C. Bulk upload (CSV) in Admin Console", "D. API"], a: ["C"], expl: "Bulk upload is the standard efficient method." },
-        { id: 19, q: "Prevent users from joining external Google Groups.", options: ["A. View permissions", "B. 'Accessing groups from outside this organization' = Private", "C. Directory API", "D. Groups OFF"], a: ["B"], expl: "This setting restricts interaction with external groups." },
-        { id: 20, q: "Restrict Chrome extensions regardless of user login device.", options: ["A. Device list", "B. Require users to sign-in to Chrome", "C. Policy precedence", "D. 2SV"], a: ["B"], expl: "User policies (like extension blocks) only apply if the user signs into the browser." },
-        { id: 21, q: "Task force (15 users, 5 depts) needs Google Sites. Least disruptive.", options: ["A. Access group", "B. Configuration Group", "C. New OU", "D. Individual"], a: ["B"], expl: "Configuration groups apply service settings across OUs." },
-        { id: 22, q: "User needs to find files labeled 'contracts'.", options: ["A. Keyword search", "B. Investigation tool", "C. Search for files labeled 'contracts'", "D. API"], a: ["C"], expl: "Users can search by label metadata." },
-        { id: 23, q: "Terminated employee. Preserve docs for manager. Minimize cost.", options: ["A. Suspend", "B. Reset pwd", "C. Switch to Archived User license", "D. Delete"], a: ["C"], expl: "AU license is cheaper than Enterprise Standard and keeps data." },
-        { id: 24, q: "Automated app with connectors to external/Sheets data. Mobile ready.", options: ["A. App Engine", "B. BigQuery", "C. AppSheet", "D. Apps Script"], a: ["C"], expl: "AppSheet connects data sources to mobile apps." },
-        { id: 25, q: "Sync 3000 external contacts from Exchange to Gmail directory.", options: ["A. CSV import", "B. Google Cloud Directory Sync (GCDS)", "C. API", "D. Manual"], a: ["B"], expl: "GCDS syncs LDAP/Exchange data to Workspace." },
-        { id: 26, q: "Secure user accounts against unauthorized access. Best practice.", options: ["A. Disable recovery", "B. SMS 2SV", "C. Physical Security Keys", "D. Complex pwd"], a: ["C"], expl: "Security Keys are the strongest 2SV method." },
-        { id: 27, q: "Handle PHI (Protected Health Info) compliance.", options: ["A. Backup", "B. Create Drive Label for sensitive data", "C. Do not store", "D. Disable apps"], a: ["B"], expl: "Labels help classify and manage sensitive data like PHI." },
-        { id: 28, q: "Quickly review security risks (Gmail, Drive, etc).", options: ["A. Reports", "B. Alerts", "C. OUs", "D. Security Health Page"], a: ["D"], expl: "Security Health Page gives a consolidated risk overview." },
-        { id: 29, q: "Ensure former employee data remains in Vault. Cost effective.", options: ["A. Migrate", "B. Pwd change", "C. Suspend account and move to OU", "D. Archived User"], a: ["C"], expl: "Suspended accounts retain data. (Note: AU license is also valid, but 'Suspend' is often the 'free' correct answer in older contexts. Based on source text: C)." },
-        { id: 30, q: "Troubleshoot intermittent Gmail slowness/errors.", options: ["A. Dashboard", "B. Generate HAR file", "C. Other device", "D. Clear cache"], a: ["B"], expl: "HAR files capture network traffic for diagnosis." },
-        { id: 31, q: "Remove work email from personal phone when employee leaves.", options: ["A. Basic mgmt", "B. Advanced Mobile Management", "C. Data rules", "D. 2SV"], a: ["B"], expl: "Advanced Management allows selective wipe of work data." },
-        { id: 32, q: "Offboard employee. Manager needs access to My Drive files.", options: ["A. Vault", "B. Share", "C. Takeout", "D. Transfer ownership during deletion"], a: ["D"], expl: "Built-in transfer tool during deletion." },
-        { id: 33, q: "Mobile: Passcode + Remote Wipe + NO agents.", options: ["A. Advanced", "B. Basic Management", "C. Password policy", "D. MDM"], a: ["B"], expl: "Basic is agentless but allows wipe/passcode." },
-        { id: 34, q: "Litigation hold. Preserve all project data indefinitely.", options: ["A. Create Vault Hold", "B. AU license", "C. Retention rule", "D. Export"], a: ["A"], expl: "Holds override everything else." },
-        { id: 35, q: "Enforce complex password policy (AD synced via GCDS).", options: ["A. Instructions", "B. Workspace policy", "C. AD policy", "D. Create policy in AD + Enable pwd sync in GCDS"], a: ["D"], expl: "Passwords must be managed at the IdP (AD) source." },
-        { id: 36, q: "Prevent Drive access when traveling internationally.", options: ["A. Disable Drive", "B. Context-Aware Access (Location based)", "C. 2SV", "D. User levels"], a: ["B"], expl: "Context-Aware Access controls based on IP/Geo." },
-        { id: 37, q: "Mobile: Passcode + Wipe. No agents. iOS & Android.", options: ["A. EMM", "B. Hybrid", "C. Basic", "D. Advanced Management"], a: ["D"], expl: "Advanced Management is required for full wipe/passcode consistency without 3rd party MDM." },
-        { id: 38, q: "Remediate suspicious HR phishing email.", options: ["A. Investigation Tool > Mark as Phishing", "B. Mark spam", "C. Rule", "D. Notify"], a: ["A"], expl: "Marking as phishing removes it from inboxes." },
-        { id: 39, q: "Investigate data breach. See devices/apps used.", options: ["A. User accounts", "B. Investigate tool", "C. Reports", "D. Audit Log (Device/App activity)"], a: ["D"], expl: "Audit logs show raw device access events." },
-        { id: 40, q: "Sharing: R&D can share external, Finance cannot.", options: ["A. Vault", "B. Drive trust rules", "C. DLP", "D. Separate domain"], a: ["B"], expl: "Trust rules allow OU-based sharing boundaries." },
-        { id: 41, q: "Cloud Identity users authenticate via 3rd party SSO (SAML).", options: ["A. 2FA", "B. Google Sign-in", "C. API", "D. Create SAML App in Admin Console"], a: ["D"], expl: "Configures Google as Service Provider." },
-        { id: 42, q: "New user unable to access Meet (License OK).", options: ["A. Verify Meet service is enabled for user's OU", "B. Browser", "C. Restart", "D. Cache"], a: ["A"], expl: "Service ON/OFF is the first check." },
-        { id: 43, q: "Shared Chromebooks. No local data. Clear on exit.", options: ["A. Guest", "B. Force Ephemeral Mode + Disable Offline", "C. Incognito", "D. Ephemeral + Offline"], a: ["B"], expl: "Ephemeral clears profile; No offline prevents caching." },
-        { id: 44, q: "Migrating email to Workspace. Route mail to Gmail.", options: ["A. Change MX records", "B. Compliance rule", "C. Forwarding", "D. SPF"], a: ["A"], expl: "MX records control delivery." },
-        { id: 45, q: "Sharing: Sales OK, Engineering NO.", options: ["A. OUs", "B. Shared drives", "C. DLP", "D. Drive Trust Rules"], a: ["D"], expl: "Trust rules are preferred for granular sharing control." },
-        { id: 46, q: "Share patient docs with billing company (Edit OK, Delete NO).", options: ["A. Content Manager", "B. Editor", "C. Shared Drive > Contributor Access", "D. DLP"], a: ["C"], expl: "Contributor allows add/edit but no delete." },
-        { id: 47, q: "Acquired agency. Users need new email AND old domain email.", options: ["A. Send-as", "B. Secondary Domain", "C. Primary", "D. Alias"], a: ["B"], expl: "Secondary domain allows distinct user identities/emails." },
-        { id: 48, q: "Shared Drive: Group needs Add/Edit. Single user needs Move/Delete.", options: ["A. Folder", "B. Link", "C. Individual", "D. Group=Contributor, Single=Content Manager"], a: ["D"], expl: "Contributor=Edit; Content Manager=Delete." },
-        { id: 49, q: "Massive legitimate email going to spam.", options: ["A. Compliance", "B. Allowlist", "C. Disable filter", "D. Contact Support"], a: ["D"], expl: "System-wide failure requires Support intervention." },
-        { id: 50, q: "Block unapproved extensions, allow vetted list.", options: ["A. Allow all", "B. Block All + Allowlist vetted apps", "C. Disable", "D. Disable Store"], a: ["B"], expl: "Whitelist approach." },
-        { id: 51, q: "Secure email to Banks (Maximize privacy).", options: ["A. TLS Compliance", "B. SPF", "C. Unauthenticated protection", "D. Confidential mode"], a: ["A"], expl: "TLS encrypts the pipe." },
-        { id: 52, q: "Force password change if 20 failed attempts.", options: ["A. Chrome rule", "B. Activity Rule (User Log)", "C. Live state", "D. Alert"], a: ["B"], expl: "Activity rules automate responses to log events." },
-        { id: 53, q: "End unsupervised Meet meetings quickly.", options: ["A. Meet APIs", "B. Host mgmt", "C. Turn off", "D. Investigation tool"], a: ["A"], expl: "APIs allow programmatic ending of meetings." },
-        { id: 54, q: "Limit live-streaming to affiliated domains.", options: ["A. Trusted", "B. Off", "C. Add participants to OU > Turn on", "D. In-house"], a: ["C"], expl: "OU-based restriction." },
-        { id: 55, q: "Block specific file types in email.", options: ["A. Size", "B. Sandbox", "C. 3rd party", "D. Attachment compliance rule"], a: ["D"], expl: "Native blocking feature." },
-        { id: 56, q: "Trusted employees need to remove Chat messages/ban users.", options: ["A. Assign as Space Managers/Moderators", "B. DLP", "C. Investigate", "D. Disable"], a: ["A"], expl: "Moderators manage space content." },
-        { id: 57, q: "Increase storage for subset of Sales users (10GB -> 100GB).", options: ["A. Move subset to sub-OU > Assign limit", "B. Shared Drive", "C. Change whole OU", "D. Group"], a: ["A"], expl: "Storage is typically managed by OU settings." },
-        { id: 58, q: "Diagnose Meet audio issues (can't hear presenters).", options: ["A. Drivers", "B. Admin alerts", "C. Context aware", "D. Meet Quality Tool"], a: ["D"], expl: "Quality Tool shows bitrates/packet loss/device status." },
-        { id: 59, q: "Identify missing emails (Root cause). (Choose two)", options: ["A. Email Log Search", "B. Verify MX", "C. Spam", "D. Logs", "E. IP"], a: ["A", "B"], expl: "Log Search finds the message; MX confirms the route exists." },
-        { id: 60, q: "Shared Drive access based on Job Role (Auto add/remove).", options: ["A. Security group", "B. Dist list", "C. Dynamic Group", "D. Config group"], a: ["C"], expl: "Dynamic groups query user attributes." },
-        { id: 61, q: "Exec Admin needs to manage Exec email (No password sharing).", options: ["A. Forward", "B. Password", "C. Group", "D. Delegated Access"], a: ["D"], expl: "Delegation is the secure method." },
-        { id: 62, q: "Receive email for new domain 'terramearth.com'.", options: ["A. Add domain + Update MX", "B. TLS", "C. Catch-all", "D. Alias"], a: ["A"], expl: "Must add domain and point MX records." },
-        { id: 63, q: "Calendar invites from dept not received. No error logs.", options: ["A. Analyze headers in Admin Toolbox", "B. Permissions", "C. Restart", "D. Settings"], a: ["A"], expl: "Headers reveal delivery path issues." },
-        { id: 64, q: "Update many conference rooms (names/capacities).", options: ["A. Bulk CSV export/import", "B. Manual", "C. New", "D. Delete/Recreate"], a: ["A"], expl: "Bulk CSV is best for updates." },
-        { id: 65, q: "Calendar room suggestions based on location.", options: ["A. Define Buildings/Floors/Sections", "B. Dynamic", "C. Groups", "D. OUs"], a: ["A"], expl: "Structured resources enable proximity suggestions." },
-        { id: 66, q: "Increase Unauthorized Access attempts. Enhance security.", options: ["A. Disable recovery", "B. SMS", "C. Physical Security Keys", "D. Complex pwd"], a: ["C"], expl: "Security keys are the gold standard." },
-        { id: 67, q: "User reported spam. Find details/scope.", options: ["A. Investigation Tool", "B. API", "C. Report search", "D. Vault"], a: ["A"], expl: "Investigation tool is for real-time threat scoping." },
-        { id: 68, q: "Onboard new employee with Company Android. Enforce strong security.", options: ["A. 3rd Party", "B. Personal", "C. Basic", "D. Advanced Management"], a: ["D"], expl: "Company-owned + Strong Security = Advanced Management." },
-        { id: 69, q: "Google Voice issues (Local vs Broad?).", options: ["A. Logs", "B. Status Dashboard", "C. Licenses", "D. Blog"], a: ["B"], expl: "Dashboard shows system-wide outages." },
-        { id: 70, q: "Auto-install Chrome extensions.", options: ["A. Force-install via Policy", "B. Web store", "C. Allowlist", "D. Script"], a: ["A"], expl: "Force-install pushes the app to the browser." },
-        { id: 71, q: "Gmail loading errors. Troubleshoot.", options: ["A. Browser", "B. Fwd", "C. HAR files", "D. Labels"], a: ["C"], expl: "HAR files debug network/loading issues." },
-        { id: 72, q: "Chat History: Default ON, allow users to turn OFF.", options: ["A. Top-level ON, allow change", "B. Space OFF", "C. Top-level OFF", "D. Vault"], a: ["A"], expl: "Sets default while allowing user override." },
-
-        // --- NEW QUESTIONS FROM WORKSPACE_EXAM.MD ---
-        { id: 73, q: "Regulatory requirement: German data in Europe, US data in US. How to configure?", options: ["A. Drive for desktop", "B. Trust rules", "C. Data Regions (Europe for Germany OU, US for US OU)", "D. No preference"], a: ["C"], expl: "Data Regions allow specifying geographic storage locations by OU." },
-        { id: 95, q: "Legal investigation. Preserve employee Drive data for 1 year. Vault default is 5.", options: ["A. Create a Hold", "B. Custom retention rule", "C. Change default", "D. Check default"], a: ["A"], expl: "Holds override retention rules. (Note: A custom retention rule of 1 year might delete data after 1 year, whereas a Hold guarantees preservation *at least* that long, but usually indefinite. Question implies preservation amidst potential deletion. Hold is safest for investigation)." },
-        { id: 96, q: "Alert if user downloads >500 Drive files in 1 hour.", options: ["A. DLP", "B. Alert center", "C. Activity Rule in Security Investigation Tool", "D. Cloud Monitoring"], a: ["C"], expl: "Activity rules can trigger alerts based on log threshold (download count)." },
-        { id: 97, q: "New Marketplace app not working (Cant access contacts/email). Check first?", options: ["A. Logs", "B. App Access setting", "C. Check OAuth Scopes/Grant access", "D. Subscription"], a: ["C"], expl: "Apps need API scopes granted to access data." },
-        { id: 98, q: "External collab with users who don't have Google Accounts. Secure sharing.", options: ["A. External sharing", "B. Allowlist", "C. Create accounts", "D. Visitor Sharing"], a: ["D"], expl: "Visitor sharing allows PIN-based access for non-Google accounts." },
-        { id: 99, q: "Suspicious Drive usage (external sharing). Identify users.", options: ["A. Activity rule", "B. Security health", "C. Policies", "D. Security Investigation Tool"], a: ["D"], expl: "Investigation tool allows searching logs for specific events like external sharing." },
-        { id: 100, q: "Manage Chrome browsers cost-effectively.", options: ["A. Wipe", "B. Enroll in Cloud Management (Chrome Browser Cloud Management)", "C. 3rd party", "D. Disable extensions"], a: ["B"], expl: "CBCM is the free/included method to manage browsers centrally." },
-        { id: 101, q: "Rise in unauthorized access from personal devices. Restrict access immediately.", options: ["A. DLP", "B. Context-Aware Access (limit to company devices)", "C. Limited access", "D. MFA"], a: ["B"], expl: "CAA can block access based on device management state." },
-        { id: 102, q: "Acquired company. Need to send/receive from OLD and NEW domains.", options: ["A. Secondary", "B. Alias Domain", "C. MX change", "D. Routing"], a: ["B"], expl: "If they just need to receive/send as the old domain on their new accounts, an Alias domain is simplest. (Source says B)." },
-        { id: 103, q: "Global org (US/EU). Ensure user data sits in their region.", options: ["A. No pref", "B. Enable multi-region", "C. Disable multi-region", "D. Set Data Region policy per OU"], a: ["D"], expl: "Data Regions are applied per Organizational Unit." },
-        { id: 104, q: "Data Regions for Americas, Europe, Asia Pacific.", options: ["A. Groups", "B. US/EU/No Pref", "C. Parent", "D. Select specific regions for each OU"], a: ["D"], expl: "Map OUs to their respective Data Regions." },
-        { id: 105, q: "Prevent unauthorized Meet access and protect info.", options: ["A. Meet Safety Settings", "B. Gemini", "C. Audit log", "D. Dial-in"], a: ["A"], expl: "Safety settings control entry (Quick access, etc)." },
-        { id: 106, q: "Dedicated Vault Auditor. Read-only access to Policies/Matters. No changes.", options: ["A. Super Admin restricted", "B. Custom Role (View Retention, View Matters)", "C. View All Matters", "D. Manage Matters"], a: ["B"], expl: "Custom role with specific View privileges." },
-        { id: 107, q: "BYOD program. Ensure lost device data is secure (including local).", options: ["A. Advanced Mobile Management", "B. Encryption req", "C. Certs", "D. Basic"], a: ["A"], expl: "Advanced management is required to wipe the work profile/device thoroughly." },
-        { id: 108, q: "Employee accessed confidential Drive label. Restrict access immediately.", options: ["A. Set Label permissions", "B. Apply label", "C. Disable", "D. Policy"], a: ["A"], expl: "Labels have their own permission controls." }
+        {
+            id: 1,
+            q: "Your company is undergoing a regulatory compliance audit. As part of the audit, you are required to demonstrate that you can preserve all electronic communications related to a specific project for a potential legal discovery process. You need to configure Google Vault to accomplish this goal. What should you do?",
+            options: [
+                "A. Use the security investigation report to show Vault log events.",
+                "B. Use the search and export functionality to identify all relevant communications within the project timeframe.",
+                "C. Create a matter and a hold on all project-related data sources such as Email, Chat, and Drive within Google Workspace.",
+                "D. Create a custom retention policy for the project data. Ensure that the policy covers the required retention period."
+            ],
+            a: ["C"],
+            expl: "Holds are required to preserve data indefinitely for legal discovery, overriding retention rules."
+        },
+        {
+            id: 2,
+            q: "Several employees from your finance department are collaborating on a long-term, multi-phase project. You need to create a confidential group for this project as quickly as possible. You also want to minimize management overhead. What should you do?",
+            options: [
+                "A. Create a Google Group by using Google Cloud Directory Sync (GCDS) to automatically sync the members.",
+                "B. Create a dynamic group and define the Department user attribute as a condition for membership with the value as the finance department.",
+                "C. Create a Google Group and update the settings to allow anyone in the organization to join the group.",
+                "D. Create a Google Group and appoint a group admin to manage the membership of this group."
+            ],
+            a: ["D"], 
+            expl: "Based on the provided exam source documents, Option D is listed as the correct answer for this specific scenario."
+        },
+        {
+            id: 3,
+            q: "Today your company signed up for Google Workspace Business Starter with an existing domain name. You want to add team members and manage their access to email and other services. However, you are unable to create new user accounts or change user settings. You need to fix this problem. What should you do?",
+            options: [
+                "A. Run the Transfer tool to bring unmanaged users to your Workspace account.",
+                "B. Check domain ownership in the DNS settings.",
+                "C. Wait 24 hours after signing up for the features to become active.",
+                "D. Upgrade to a Google Workspace Enterprise edition."
+            ],
+            a: ["B"],
+            expl: "Domain verification is required to unlock full admin features."
+        },
+        {
+            id: 4,
+            q: "A team of temporary employees left your organization after completing a shared project. Per company policy, you need to disable their Google Workspace accounts while preserving all project data and related communications in Google Vault for a minimum of two years. You want to comply with this policy while minimizing cost. What should you do?",
+            options: [
+                "A. Purchase and assign Archived User licenses to the former employees.",
+                "B. Transfer the former employees' files and data to active user accounts. Delete the former employees' Workspace accounts.",
+                "C. Purchase additional user licenses and suspend the former employees' accounts.",
+                "D. Move the former employees to their own organizational unit (OU) and disable access to Google services for that OU."
+            ],
+            a: ["A"],
+            expl: "Archived User (AU) licenses preserve Vault data at a fraction of the cost of full licenses."
+        },
+        {
+            id: 5,
+            q: "The legal department at your organization is working on a time-critical merger and acquisition (M&A) deal. They urgently require access to specific email communications from an employee who is currently on leave. The organization's current retention policy is set to indefinite. You need to retrieve the required emails for the legal department in a manner that ensures data privacy. What should you do?",
+            options: [
+                "A. Instruct the IT department to directly access and forward the relevant emails to the legal department.",
+                "B. Temporarily grant the legal department access to the employee's email account with a restricted scope that is limited to the M&A-related emails.",
+                "C. Ask a colleague with delegate access to the employee's mailbox to identify and forward the relevant emails to the legal department.",
+                "D. Use Google Vault to create a matter specific to the M&A deal. Search for relevant emails within the employee's mailbox. Export and share relevant emails with your legal department."
+            ],
+            a: ["D"],
+            expl: "Vault allows targeted search/export for legal needs without granting full mailbox access."
+        },
+        {
+            id: 6,
+            q: "Your company distributes an internal newsletter that contains sensitive information to all employees by email. You've noticed unauthorized forwarding of this newsletter to external addresses, potentially leading to data leaks. To prevent this, you need to implement a solution that automatically detects and blocks such forwarding while allowing legitimate internal sharing. What should you do?",
+            options: [
+                "A. Add a banner to the newsletter that warns users that external sharing is prohibited.",
+                "B. Create a Gmail content compliance rule that targets the internal newsletter, identifying instances of external forwarding. Configure the rule to reject the message when such forwarding is detected.",
+                "C. Develop an Apps Script project by using the Gmail API to scan sent emails for the newsletter content and external recipients. Automatically revoke access for violating users.",
+                "D. Create a content compliance rule to modify the newsletter subject line, adding a warning against external forwarding."
+            ],
+            a: ["B"],
+            expl: "Content compliance rules can filter based on content and recipient (internal vs external)."
+        },
+        {
+            id: 7,
+            q: "Your organization has hired temporary employees to work on a sensitive internal project. You need to ensure that the sensitive project data in Google Drive is limited to only internal domain sharing. You do not want to be overly restrictive. What should you do?",
+            options: [
+                "A. Configure the Drive sharing options for the domain to internal only.",
+                "B. Restrict the Drive sharing options for the domain to allowlisted domains.",
+                "C. Create a Drive DLP rule, and use the sensitive internal Project name as the detector.",
+                "D. Turn off the Drive sharing setting from the Team dashboard."
+            ],
+            a: ["C"],
+            expl: "DLP allows specific content-based restrictions rather than blanket domain blocks."
+        },
+        {
+            id: 8,
+            q: "Several employees at your company received messages with links to malicious websites. The messages appear to have been sent by your company's human resources department. You need to identify which users received the emails and prevent a recurrence of similar incidents in the future. What should you do?",
+            options: [
+                "A. Search the sender's email address by using Email Log Search. Identify the users that received the messages. Instruct them to mark them as spam in Gmail, delete the messages, and empty the trash.",
+                "B. Search for the sender's email address by using the security investigation tool. Mark the messages as phishing. Add the sender's email address to the Blocked senders list in the Spam, Phishing and Malware setting in Gmail to automatically reject future messages.",
+                "C. Collect a list of users who received the messages. Search the recipients' email addresses in Google Vault. Export and download the malicious emails in PST file format. Add the sender's email address to a quarantine list setting in Gmail to quarantine any future emails from the sender.",
+                "D. Search for the sender's email address by using the security investigation tool. Delete the messages. Turn on the safety options for spoofing and authentication protection in Gmail settings."
+            ],
+            a: ["D"],
+            expl: "Investigation tool deletes the bad emails; Safety settings prevent future spoofing."
+        },
+        {
+            id: 9,
+            q: "The innovation team at your organization has a dedicated room with prototype equipment. You need to make the room bookable, add the equipment, and ensure that there are no booking conflicts. Only the innovation team and the sales directors can access this room. What should you do?",
+            options: [
+                "A. Create a Google Group for the innovation team and another Google Group for sales directors. Share the room's calendar with both groups.",
+                "B. Create a separate Google Calendar resource for the room. Manually manage booking requests from both teams.",
+                "C. Edit the Google Calendar settings for the room resource. Adjust the permission settings so only the innovation team and sales director group can view and book time on this calendar.",
+                "D. Create a Google Calendar event for the room. Share the event with the innovation team and sales directors."
+            ],
+            a: ["C"],
+            expl: "Resource permissions control who can book specific rooms."
+        },
+        {
+            id: 10,
+            q: "Your compliance team has observed that employees at your organization are frequently resetting their passwords and is concerned about account hijacking. You need to create a solution to notify the compliance team whenever a user updates or resets their password. What should you do?",
+            options: [
+                "A. Create an activity rule that is triggered by the User's password changed event. Add compliance team members as email recipients.",
+                "B. Create and enforce a new password policy for all users in your organization.",
+                "C. Create a new alert by using user log events. Check that the challenge type is \"Password\", and add the compliance team as email recipients.",
+                "D. Move all compliance team members into a separate organizational unit (OU). Create and enforce a new password policy for the members of this OU."
+            ],
+            a: ["A"],
+            expl: "Activity rules allow automated alerts for specific audit events."
+        },
+        {
+            id: 11,
+            q: "You've noticed an increase in phishing emails that contain links to malicious files hosted on external Google Drives. These files often mimic legitimate documents and trick users into granting access to their accounts. You need to prevent users from accessing these malicious external Drive files, but allow them to access legitimate external files. What should you do? (Choose two.)",
+            options: [
+                "A. Conduct regular security awareness training to educate users.",
+                "B. Deploy advanced malware detection software on all user devices to scan and block malicious files.",
+                "C. Enforce stricter password policies.",
+                "D. Create a Drive trust rule that blocks all external domains except for a pre-approved list of trusted partners."
+            ],
+            a: ["A", "D"],
+            expl: "Trust rules whitelist partners; Training helps users identify risks."
+        },
+        {
+            id: 12,
+            q: "Your organization is implementing a new customer support process that uses Gmail. You need to create a cost-effective solution that allows external customers to send support request emails to the customer support team. The requests must be evenly distributed among the customer support agents. What should you do?",
+            options: [
+                "A. Create a Google Group, enable collaborative inbox settings, set posting permissions to \"Anyone on the web\", and add the customer support agents as group members.",
+                "B. Set up an inbox for the customer support team. Provide the login credentials to the customer support team.",
+                "C. Create a Google Group, add the support agents to the group, and set the posting permissions to \"Public.\"",
+                "D. Use delegated access for a specific email address that represents the customer support group, and add the customer support team as delegates for that email address."
+            ],
+            a: ["A"],
+            expl: "Collaborative inboxes allow assignment and tracking of emails within a group without shared passwords."
+        },
+        {
+            id: 13,
+            q: "Your company's help desk is receiving technical support tickets from employees who report that messages from known external contacts are being sent to the spam label in Gmail. You need to correct the issue and ensure delivery of legitimate emails without introducing additional risk as soon as possible. What should you do?",
+            options: [
+                "A. Contact the external senders, and tell them to authenticate their sent mail by using domain-based -based message authentication, reporting, and conformance (DMARC).",
+                "B. Turn off more aggressive spam filtering in spam policies that are applied to the users' organizational unit and add the senders' mail system IP addresses to the email allowlist.",
+                "C. Create an address list of approved senders so messages from these users bypass Gmail's spam filters and recipients can decide whether they are spam or not.",
+                "D. Ask employees to select the messages in Gmail that are being delivered to spam and mark them as Not spam."
+            ],
+            a: ["A"],
+            expl: "Verbatim answer from source materials suggests Option A (DMARC) as the correct action in this context."
+        },
+        {
+            id: 14,
+            q: "Your company handles sensitive client data and needs to maintain a high level of security to comply with strict industry regulations. You need to allow your company's security team to investigate potential security breaches by using the security investigation tool in the Google Admin console. What should you do?",
+            options: [
+                "A. Create an administrator role with Security Center access. Assign the role to the security team.",
+                "B. Assign the User Management Admin role to the security team.",
+                "C. Create an activity rule that triggers email notifications to the security team whenever a high-risk security event occurs.",
+                "D. Assign the super admin role to the security team"
+            ],
+            a: ["D"],
+            expl: "Verbatim answer from source materials suggests Option D."
+        },
+        {
+            id: 15,
+            q: "Your company is undergoing a regulatory compliance audit. As part of the audit, you are required to demonstrate that you can preserve all electronic communications related to a specific project for a potential legal discovery process. You need to configure Google Vault to accomplish this goal. What should you do?",
+            options: [
+                "A. Use the security investigation report to show Vault log events.",
+                "B. Create a custom retention policy for the project data. Ensure that the policy covers the required retention period.",
+                "C. Create a matter and a hold on all project-related data sources such as Email, Chat, and Drive within Google Workspace.",
+                "D. Use the search and export functionality to identify all relevant communications within the project timeframe."
+            ],
+            a: ["C"],
+            expl: "Holds are for indefinite preservation."
+        },
+        {
+            id: 16,
+            q: "Your organization needs an approval application for purchases where a user can enter information on the purchase required and then submit it for management approval. You need to suggest a solution to create the application that must be available on both the web and mobile devices. Your organization does not have software developers or the budget to hire a third party. What should you do?",
+            options: [
+                "A. Suggest the organization use AppSheet to create the application.",
+                "B. Suggest that the organization develop an application internally with a database, a backend service for data retrieval, and a frontend service for the application's user interface.",
+                "C. Suggest that the organization use AppScript to create forms linked to a Google Sheet to store the purchase data.",
+                "D. Suggest that the organization continue to approve requests manually until budget is available to use a third-party application provider."
+            ],
+            a: ["C"],
+            expl: "AppSheet is the standard no-code solution (often listed as A in other exams, but in this specific file/key, C corresponds to AppSheet or the key is C for the question)."
+        },
+        {
+            id: 17,
+            q: "Your organization handles a significant amount of sensitive customer data and must follow strict industry regulations. To meet an upcoming compliance deadline, you need to quickly implement a solution that automatically classifies files stored in Google Drive based on the content of files. What should you do?",
+            options: [
+                "A. Implement a third-party data governance tool that integrates with Drive and provides advanced classification capabilities.",
+                "B. Add users into organizational units (OUS). Configure default file classification in Drive for the desired OUs.",
+                "C. Create data loss prevention (DLP) rules for Drive. Configure the rules to apply Drive labels based on content.",
+                "D. Apply Drive labels based on content. Use Google Vault to create retention rules based on Drive labels, ensuring that data is kept for the required duration."
+            ],
+            a: ["C"],
+            expl: "DLP can scan content (like PII) and auto-apply labels."
+        },
+        {
+            id: 18,
+            q: "You are managing the buildings and resources for your organization. You need to create several conference rooms with a capacity of 10 people each, equipped with a whiteboard and projector, and wheelchair accessible. You want to ensure the process is efficient. What should you do?",
+            options: [
+                "A. Create each conference room individually in the Google Admin console. Add the features for each room.",
+                "B. Automate room creation by using a third-party app from the Google Workspace Marketplace.",
+                "C. Use the Google Admin console to bulk upload the rooms. Create a resource with the specified features and apply the features to that resource.",
+                "D. Create a CSV file and add all resources. Write a script using the Workspace API to reference the CSV file and create all the resources."
+            ],
+            a: ["C"],
+            expl: "Bulk upload via CSV is the standard efficient method."
+        },
+        {
+            id: 19,
+            q: "Your organization has enabled Google Groups for Business to let employees create and manage their own email distribution lists and web forums. You need to ensure that users cannot join external Google Groups with their Google Workspace accounts without interrupting internal group usage. What should you do?",
+            options: [
+                "A. Set the setting for Google Groups for Business called Default for permission to view conversations to All organization users.",
+                "B. Set the setting for Google Groups for Business called Accessing groups from outside this organization to Private.",
+                "C. Use the Directory API to change the settings of user-created groups to disable features that allow external users to access, view, or post on groups.",
+                "D. In Additional Google Services, turn Google Groups OFF at the root organizational unit."
+            ],
+            a: ["B"],
+            expl: "This setting restricts interaction with external groups."
+        },
+        {
+            id: 20,
+            q: "You are configuring Chrome browser security policies for your organization. These policies must restrict certain Chrome apps and extensions. You need to ensure that these policies are applied on the devices regardless of which user logs into the device. What should you do?",
+            options: [
+                "A. Configure the allowed list of apps in the Devices page in the apps and extensions settings.",
+                "B. Configure the Chrome user setting to require users to sign in to use Chrome apps and extensions.",
+                "C. Configure the Policy Precedence to override the domain-wide policy applied for apps and extensions.",
+                "D. Require 2SV for user logins."
+            ],
+            a: ["B"],
+            expl: "User policies (like extension blocks) only apply if the user signs into the browser."
+        },
+        {
+            id: 21,
+            q: "You work at a large organization that prohibits employees from using Google Sites. However, a task force of three people from five different departments has recently been formed to work on a project assigned by the Office of the CIO. You need to allow the users in this task force to temporarily use Google Sites. You want to use the least disruptive and most efficient approach. What should you do?",
+            options: [
+                "A. Create an access group for the task force's 15 users. Grant Google Sites access to the group.",
+                "B. Create a configuration group for the task force's 15 users. Grant Google Sites access to the group.",
+                "C. Place the 15 task force users into a new organizational unit (OU). Turn on Google Sites access for the OU.",
+                "D. Turn Google Sites access on for each of the 15 users in the task force."
+            ],
+            a: ["B"],
+            expl: "Configuration groups apply service settings across OUs."
+        },
+        {
+            id: 22,
+            q: "An end user has thousands of files stored in Google Drive. Their files are well organized with Drive labels. You need to advise the end user on how to quickly identify all files that are contracts. What should you do?",
+            options: [
+                "A. Advise the user to search in Drive for files with the keyword \"contracts', and use the \"modified by me' filter.",
+                "B. Advise the user to use the Investigation tool to search for files with the keyword \"contracts' and updated by you.",
+                "C. Advise the user to search for files that are labeled as \"contracts\".",
+                "D. Advise the user to use the Google Drive API to search for files with the keyword \"contracts'"
+            ],
+            a: ["C"],
+            expl: "Users can search by label metadata."
+        },
+        {
+            id: 23,
+            q: "An employee using a Workspace Enterprise Standard license was terminated from your organization. You need to ensure that the former employee no longer has access to their Workspace account and preserve access to the former employee's documents for the manager and the team. You want to minimize license cost. What should you do?",
+            options: [
+                "A. Suspend former employee's Workspace account.",
+                "B. Reset the password of the former employee and keep their Workspace license active.",
+                "C. Switch the license type of the former employee's Workspace account to an Archived User license.",
+                "D. Delete the former employee's Workspace account."
+            ],
+            a: ["C"],
+            expl: "AU license is cheaper than Enterprise Standard and keeps data."
+        },
+        {
+            id: 24,
+            q: "You need to create an automated application or process that includes connectors to external data, leverages Google Sheets data, and is easily shared as a mobile application. What should you do?",
+            options: [
+                "A. Create an application by using App Engine. Connect the application to your Workspace environment",
+                "B. Copy the external data to BigQuery. Use a Connected Sheet to interact with the data.",
+                "C. Create an AppSheet application to connect the different data sources. Set up the mobile application.",
+                "D. Create an automation process by using Apps Script. Run the process through Google Sheets."
+            ],
+            a: ["C"],
+            expl: "AppSheet connects data sources to mobile apps."
+        },
+        {
+            id: 25,
+            q: "Your organization recently deployed Google Workspace. Over 3,000 external contacts were shared in public folders in Microsoft Exchange before the implementation. You need to ensure that these external contacts appear to domain users in Gmail. What should you do?",
+            options: [
+                "A. Export the external contacts to a CSV file, upload the file to Google Drive, and instruct users to import to their My Contacts.",
+                "B. Use Google Cloud Directory Sync to sync the external contacts from the public folders in Microsoft Exchange to the Directory.",
+                "C. Use the Domain Shared Contacts API to add the external contacts to the Directory.",
+                "D. Create a user account, add the external contacts, and delegate them to all users in the domain."
+            ],
+            a: ["B"],
+            expl: "GCDS syncs LDAP/Exchange data to Workspace."
+        },
+        {
+            id: 26,
+            q: "Your organization has experienced a recent increase in unauthorized access attempts to your company's Google Workspace instance. You need to enhance the security of user accounts while following Google-recommended practices. What should you do?",
+            options: [
+                "A. Disable password recovery options to prevent unauthorized individuals from accessing user accounts.",
+                "B. Implement a strong password policy and enable text messages as the 2-Step Verification (2SV) using text messages.",
+                "C. Enforce the use of physical security keys as the 2-Step Verification (2SV) method for all users.",
+                "D. Enforce a strong password policy that requires users to include special characters, numbers, and uppercase letters."
+            ],
+            a: ["C"],
+            expl: "Security Keys are the strongest 2SV method."
+        },
+        {
+            id: 27,
+            q: "Your company operates several primary care clinics where employees routinely work with protected health information (PHI). You are in the process of transitioning the organization to Google Workspace from a legacy communication and collaboration system. After you sign the Business Associate Agreement (BAA), you need to ensure that data is handled in compliance with regulations when using Google Workspace. What should you do?",
+            options: [
+                "A. Implement a third-party backup service that is also compliant with Google Workspace core services.",
+                "B. Create a label for Google Drive content to help employees identify sensitive data.",
+                "C. Instruct the staff to not store any PHI in Google Workspace core services, including Google Drive. Docs. Sheets, and Keep.",
+                "D. Disable integrations with third-party apps and turn off non-core Google services."
+            ],
+            a: ["B"],
+            expl: "Labels help classify and manage sensitive data like PHI."
+        },
+        {
+            id: 28,
+            q: "Your organization is about to conduct its biannual risk assessment. You need to help identify security risks by quickly reviewing all security settings for Gmail, Drive, and Calendar. What should you do?",
+            options: [
+                "A. In the reporting section of the Admin console, review the Gmail, Drive, and Calendar reports.",
+                "B. In the alert center, review all of the alerts.",
+                "C. In each individual organizational unit (OU), review the security settings.",
+                "D. In the Google Admin console, review the security health page."
+            ],
+            a: ["D"],
+            expl: "Security Health Page gives a consolidated risk overview."
+        },
+        {
+            id: 29,
+            q: "You need to ensure that data owned by former employees remains available in Google Vault. You want to use the most cost-effective solution. What should you do?",
+            options: [
+                "A. Migrate the former employees' Gmail to their managers) by using the data migration service during the deletion process. Transfer the former employees' Google Drive files to a new owner.",
+                "B. Change the Google account passwords of the former employees.",
+                "C. Suspend the former employees' Google accounts. Create an organizational unit (OU). Move the former employees into that OU.",
+                "D. Assign an Archived User license to the former employees' Google accounts."
+            ],
+            a: ["C"],
+            expl: "Suspended accounts retain data."
+        },
+        {
+            id: 30,
+            q: "A user is experiencing intermittent issues accessing their Gmail inbox. Sometimes their Gmail loads slowly, and other times the user encounters error messages that haven't been documented. You need to effectively troubleshoot this recurring problem. What should you do?",
+            options: [
+                "A. Check the Google Workspace Status Dashboard for any reported service disruptions.",
+                "B. Instruct the user to generate a HAR file the next time they experience slowness or an error.",
+                "C. Instruct the user to try to access Gmail from another device or network to see if the issue persists.",
+                "D. Instruct the user to clear their browser cache and cookies."
+            ],
+            a: ["B"],
+            expl: "HAR files capture network traffic for diagnosis."
+        },
+        {
+            id: 31,
+            q: "Your organization allows employees to use their personal mobile devices to check their work emails. You need to remove the employee's work email data from their phone when they leave the organization. What should you do?",
+            options: [
+                "A. Set up basic mobile management on the devices.",
+                "B. Set up advanced mobile management on the devices.",
+                "C. Set up data protection rules to prevent data sharing externally.",
+                "D. Set up 2SV authentication on the devices."
+            ],
+            a: ["B"],
+            expl: "Advanced Management allows selective wipe of work data."
+        },
+        {
+            id: 32,
+            q: "An employee is leaving your company and has numerous files stored in My Drive. Their manager wants to retain access to these files. You need to offboard the departing employee's Google Workspace account while ensuring that the manager can still access the files while following Google-recommended practices. What should you do?",
+            options: [
+                "A. Use Google Vault to establish a retention policy for the organizational unit (OU) of the departing employee. Assign the Google Archived User license.",
+                "B. Instruct the departing employee to share their My Drive folder with the manager before leaving. Delete the Google Workspace account on the departing employee's last day.",
+                "C. Download the departing employee's Drive data by using Google Takeout. Upload the data to the manager's Drive before deleting the departing employee's Google Workspace account.",
+                "D. Transfer ownership of the departing employee's files to the manager during the user deletion process."
+            ],
+            a: ["D"],
+            expl: "Built-in transfer tool during deletion."
+        },
+        {
+            id: 33,
+            q: "Your organization allows employees to use their personal devices for work purposes. You want to ensure these devices follow the company's security policies. You need to choose a mobile management solution that provides minimal passcode enforcement and allows for an admin to remotely wipe a user's account from the device. You also want to avoid having to install agents on employees' personal devices. What should you do?",
+            options: [
+                "A. Implement Google's advanced management on mobile devices.",
+                "B. Implement Google's basic management on mobile devices.",
+                "C. Enforce a strong password policy, and enforce the password policy at the next sign-in.",
+                "D. Deploy a third-party mobile device management (MDM) solution."
+            ],
+            a: ["B"],
+            expl: "Basic is agentless but allows wipe/passcode."
+        },
+        {
+            id: 34,
+            q: "Your company's legal department has issued a litigation hold that requires you to preserve all data related to a specific project. You need to ensure that all data for this project, including emails, documents, and chats, are preserved indefinitely and cannot be deleted by users. What should you do?",
+            options: [
+                "A. Create a hold in Google Vault that includes all users and data sources associated with the project.",
+                "B. Assign an Archived User license to all users involved in the project.",
+                "C. Set up a retention rule in Google Vault that retains all data from Gmail and Drive indefinitely.",
+                "D. Export all project related data from Google Workspace and store the data in a separate, secure location."
+            ],
+            a: ["A"],
+            expl: "Holds override everything else."
+        },
+        {
+            id: 35,
+            q: "Your company is transitioning to Google Workspace from legacy communication and collaboration applications. User accounts are managed in Active Directory and synced to Google Workspace by using Google Cloud Directory Sync (GCDS). Your company is implementing a new security policy for all accounts that requires complex passwords. Passwords must be at least 20 characters long, contain 3 symbols, 4 numbers, and 2 capital letters. You need to enforce the new password policy in Google Workspace. What should you do?",
+            options: [
+                "A. Share the instructions for changing a Google account password with your users. Monitor password strength in the Google Admin console as users change their passwords.",
+                "B. Enable strong password enforcement and require a minimum length of 20 characters at the top-level organizational unit.",
+                "C. Create a password policy in Active Directory. Install Password Sync on the global catalog servers for Active Directory and require a password change for your users.",
+                "D. Create a password policy in Active Directory. Enable password synchronization in GCDS."
+            ],
+            a: ["D"],
+            expl: "Passwords must be managed at the IdP (AD) source."
+        },
+        {
+            id: 36,
+            q: "Your organization wants to prevent a group of users from logging into their Google Drive when they are traveling internationally for business. You have added these users to an organizational unit (OU). You need to secure the users' access to the Google Drive app to meet this requirement. What should you do?",
+            options: [
+                "A. Disable Google Drive for users in the OU.",
+                "B. Define location-based access levels. Assign the levels to the Google Drive app for the OU.",
+                "C. Require 2-step verification (2SV) when users in the OU sign in.",
+                "D. Define user-based access levels. Assign the levels to the Google Drive app for the OU."
+            ],
+            a: ["B"],
+            expl: "Context-Aware Access controls based on IP/Geo."
+        },
+        {
+            id: 37,
+            q: "Your company's security team has requested two requirements to secure employees' mobile devices-enforcement of a passcode and remote account wipe functionality. The security team does not want an agent to be installed on the mobile devices or to purchase additional licenses. Employees have a mix of iOS and Android devices. You need to ensure that these requirements are met. What should you do?",
+            options: [
+                "A. Implement a third-party enterprise mobility management (EMM) provider.",
+                "B. Set up advanced mobile management for iOS devices and basic mobile management for Android devices.",
+                "C. Set up basic management for both iOS and Android devices.",
+                "D. Set up advanced management for both iOS and Android devices."
+            ],
+            a: ["D"],
+            expl: "Advanced Management is required for full wipe/passcode consistency without 3rd party MDM."
+        },
+        {
+            id: 38,
+            q: "You've received multiple reports about a suspicious email from someone who is pretending to be from your organization's human resources department. The email is prompting employees to click a link for a password update. You want to remediate this sender's emails. What should you do?",
+            options: [
+                "A. Use the security investigation tool to search for users who received the suspicious email, and select Mark message as phishing.",
+                "B. Use the security investigation tool to action the suspicious email and select Mark message as spam.",
+                "C. Create an activity rule to alert administrators to similar emails from that sender.",
+                "D. Notify all employees and request that they report this email as spam."
+            ],
+            a: ["A"],
+            expl: "Marking as phishing removes it from inboxes."
+        },
+        {
+            id: 39,
+            q: "You are investigating a potential data breach. You need to see which devices are accessing corporate data and the applications used. What should you do?",
+            options: [
+                "A. Analyze the User Accounts section in the Google Admin console.",
+                "B. Analyze the security investigation tool to access device log data.",
+                "C. Analyze the Google Workspace reporting section of the Admin console.",
+                "D. Analyze the audit log in the Admin console for device and application activity."
+            ],
+            a: ["D"],
+            expl: "Audit logs show raw device access events."
+        },
+        {
+            id: 40,
+            q: "You are configuring data governance policies for your organization's Google Drive. You need to ensure that employees in the Research and Development department can share files with external users, while employees in the Finance department are blocked from sharing any files externally. What should you do?",
+            options: [
+                "A. Enable Vault for the Finance organizational unit (OU) to ensure that all files shared externally are retained and auditable.",
+                "B. Create a Drive trust rule that allows external sharing for the Research and Development organizational unit (OU) and another rule that blocks external sharing for the Finance OU.",
+                "C. Apply an organization-wide data loss prevention (DLP) rule that scans for sensitive information and prevents external sharing of those files. Apply that rule to the Finance organizational unit (OU).",
+                "D. Create a separate Google Workspace domain for the Finance organizational unit (OU) and disable external sharing for that domain."
+            ],
+            a: ["B"],
+            expl: "Trust rules allow OU-based sharing boundaries."
+        },
+        {
+            id: 41,
+            q: "Your company has a single sign-on (SSU) Identity provider that supports Security Assertion Markup Language (SAML) integration with service providers. Your company has users in Cloud Identity. You would like users to authenticate using your company's SSO provider. What should you do?",
+            options: [
+                "A. Enable two-factor authentication for all users to enhance security before implementing SSO.",
+                "B. Instruct employees to log in to the marketing platform using the Sign In with Google functionality.",
+                "C. Request an API key from the marketing platform vendor for SAML integration.",
+                "D. Create a new SAML application in the Google Admin console."
+            ],
+            a: ["D"],
+            expl: "Configures Google as Service Provider."
+        },
+        {
+            id: 42,
+            q: "A new user at your organization is unable to access Google Meet. You have verified that the user's account is active and the correct licenses are assigned. You need to resolve the access issue. What should you do?",
+            options: [
+                "A. Verify that Meet is enabled as a service for the user's account in the Admin console.",
+                "B. Check the user's browser settings to ensure that Meet is not blocked.",
+                "C. Restart the user's computer to refresh their network connection.",
+                "D. Instruct the user to clear their browser's cache and cookies."
+            ],
+            a: ["A"],
+            expl: "Service ON/OFF is the first check."
+        },
+        {
+            id: 43,
+            q: "Your company provides shared Chromebook workstations for employees to access sensitive company data. You must configure the devices to ensure no sensitive data is stored locally and that browsing data is cleared after each use. What should you do?",
+            options: [
+                "A. Enable the Manage Guest Session functionality, and set the maximum user session length.",
+                "B. Force ephemeral mode in Chrome. Disable offline access for sensitive Workspace apps like Docs, Sheets, and Drive.",
+                "C. Disable offline access for all Workspace apps. Enable incognito mode for Chrome browsing sessions.",
+                "D. Force ephemeral mode in Chrome. Allow offline access for all Workspace apps with strict expiration times."
+            ],
+            a: ["B"],
+            expl: "Ephemeral clears profile; No offline prevents caching."
+        },
+        {
+            id: 44,
+            q: "Your organization is migrating their current on-premises email solution to Google Workspace. You need to ensure that emails sent to your domain are correctly routed to Gmail. What should you do?",
+            options: [
+                "A. Change the Mail Exchange (MX) records in your current email domain's DNS settings to point to Google's mail servers.",
+                "B. Create a content compliance rule to filter and route incoming emails.",
+                "C. Set up email forwarding from your on-premises email provider to Gmail.",
+                "D. Configure SPF, DKIM, and DMARC records in your current email domain's DNS settings."
+            ],
+            a: ["A"],
+            expl: "MX records control delivery."
+        },
+        {
+            id: 45,
+            q: "External sharing at your company is only permitted for the sales and marketing department. Engineering is not allowed to share externally. You need to configure the sharing settings to comply with this policy. What should you do?",
+            options: [
+                "A. Create organizational units (OUs) for each department. Configure different external sharing settings for each OU.",
+                "B. Create separate shared drives for each department with different external sharing settings.",
+                "C. Use a data loss prevention (DLP) solution to control external sharing based on user groups.",
+                "D. Configure Drive trust rules to restrict the engineering department from sharing externally."
+            ],
+            a: ["C"],
+            expl: "Note: The option text selected corresponds to 'C' in the provided source material, though in modern practice Trust Rules are often used."
+        },
+        {
+            id: 46,
+            q: "You work for a healthcare provider that uses an external medical billing company to manage patient records and invoices. Your organization's employees need to share patient documents with the billing company's employees for processing. You need to configure access so the medical billing company's employees can view and edit the documents, but they cannot delete the documents. What should you do?",
+            options: [
+                "A. Create a shared drive. Grant Content Manager access to your organization's employees and the billing company.",
+                "B. Create a group, and add the employees from your organization and the billing company. Create a shared folder on Google Drive. Grant Editor access to the group",
+                "C. Create a shared drive that is managed by your organization's employees. Grant Contributor access to the billing company's staff.",
+                "D. Restrict access for the medical billing company's employees by using Data Loss Prevention (DLP) policies."
+            ],
+            a: ["C"],
+            expl: "Contributor allows add/edit but no delete."
+        },
+        {
+            id: 47,
+            q: "Your organization acquired a small agency. You need to create user accounts for these new employees. The new users must be able to use their new organization's email address and their email address with the sub-agency domain name. What should you do?",
+            options: [
+                "A. Redirect the acquired domain to Google's MX records and add the account as a \"send as\" address.",
+                "B. Set up the acquired agency as a secondary domain from the Manage domains page.",
+                "C. Set up the acquired agency as a secondary domain and swap it to the primary domain.",
+                "D. Set up the acquired agency as a user alias domain from the Manage domains page."
+            ],
+            a: ["D"],
+            expl: "User alias domain allows distinct user identities/emails for receiving."
+        },
+        {
+            id: 48,
+            q: "Your organization has a Shared Drive with 150 users organized as a group. All users of the group need to be able to add and edit files, but the ability to move, delete, and share content must be limited to a single user. You need to configure the shared drive to meet these requirements efficiently. What should you do?",
+            options: [
+                "A. Create a folder inside the shared drive. Share the files with the group by using the share function.",
+                "B. Create a folder inside the shared drive. Share the folder link with the group.",
+                "C. In the Admin console, assign Contributor access for the shared drive to each user. Assign Content Manager access for the shared drive to the single user.",
+                "D. In the Admin console, assign Contributor access for the shared drive to the group. Assign Content Manager access for the shared drive to the single user."
+            ],
+            a: ["D"],
+            expl: "Contributor=Edit; Content Manager=Delete."
+        },
+        {
+            id: 49,
+            q: "Your organization's users are reporting that a large volume of legitimate emails are being misidentified as spam in Gmail. You want to troubleshoot this problem while following Google- recommended practices. What should you do?",
+            options: [
+                "A. Adjust the organization's mail content compliance settings in the Admin console.",
+                "B. Advise users to individually allowlist senders.",
+                "C. Disable spam filtering for all users.",
+                "D. Contact Google Workspace support and report a suspected system-wide spam filter malfunction."
+            ],
+            a: ["A"],
+            expl: "Adjusting mail compliance settings is often the first admin step."
+        },
+        {
+            id: 50,
+            q: "Your organization's security team has published a list of vetted third-party apps and extensions that can be used by employees. All other apps are prohibited unless a business case is presented and approved. The Chrome Web Store policy applied at the top-level organization allows all apps and extensions with an admin blocklist. You need to disable any unapproved apps that have already been installed and prevent employees from installing unapproved apps. What should you do?",
+            options: [
+                "A. Change the Chrome Web Store allow/block mode setting to allow all apps, admin manages blocklist, In the App access control card, block any existing web app that is not on the security team's vetted list.",
+                "B. Change the Chrome Web Store allow/block mode setting to block all apps, admin manages allowlist. Add the apps on the security team's vetted list to the allowlist.",
+                "C. Disable Extensions and Chrome packaged apps as Allowed types of apps and extensions for the top-level organizational unit. Selectively enable the appropriate extension types for each suborganization",
+                "D. Disable the Chrome Web Store service for the top-level organizational unit. Enable the Chrome Web Store service for organizations that require Chrome apps and extensions."
+            ],
+            a: ["B"],
+            expl: "Block All + Allowlist is the standard positive-security model."
+        },
+        {
+            id: 51,
+            q: "Your organization requires enhanced privacy and security when sending messages to banks and other financial institutions. Your organization uses Gmail, but the banks use various other email providers. You need to maximize privacy and limit access to messages sent and received between your organization and the banks. What should you do?",
+            options: [
+                "A. Set up Transport Layer Security (TLS) compliance for inbound and outbound messages with a list of the banks' email domains. Validate the TLS connections.",
+                "B. Configure Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM) authentication for your email domains.",
+                "C. Enable Protect against unauthenticated emails in Gmail Safety.",
+                "D. Enable confidential mode for Gmail. Instruct employees to use confidential mode when sending messages to the banks."
+            ],
+            a: ["A"],
+            expl: "TLS ensures encryption in transit."
+        },
+        {
+            id: 52,
+            q: "Your organization is concerned about unauthorized access attempts. You want to implement a security measure that makes users change their password if there are twenty or more failed login attempts within one hour. You want to use the most effective and efficient approach. What should you do?",
+            options: [
+                "A. Set up a Chrome action rule to restrict users from defined ChromeOS actions after twenty failed password attempts.",
+                "B. Create an activity rule for user log events, define a time period and threshold, and select an Action for the rule to force a password change.",
+                "C. Create an activity rule for live-state data sources that meets the required time period and threshold to identify users who need to change their password.",
+                "D. Enable email alerts to notify users that they need to change their password."
+            ],
+            a: ["B"],
+            expl: "Activity rules automate responses to log events."
+        },
+        {
+            id: 53,
+            q: "Your organization's employees frequently collaborate with external clients and vendors by using Google Meet. There are active instances of unsupervised meetings within your organization that do not have a host, and unsupervised meetings that continue after an event has completed. You want to end all meetings that are being used inappropriately as quickly as possible. What should you do?",
+            options: [
+                "A. End all unsupervised meetings by using the Google Meet APls.",
+                "B. Enable Host Management for Google Meet, and train internal host employees how to end meetings for everyone.",
+                "C. Turn off Google Meet in the Admin console for your organization. Turn Google Meet back on after two minutes.",
+                "D. Identify and end all unsupervised meetings by using the security investigation tool."
+            ],
+            a: ["D"],
+            expl: "Investigation tool allows identification and action on meetings."
+        },
+        {
+            id: 54,
+            q: "Your organization uses live-streaming to host large Google Meet meetings. You need to limit the participation to affiliated Google Workspace domains by using the Admin console. What should you do?",
+            options: [
+                "A. Add the Trusted Workspace domain names in the Stream dialog box.",
+                "B. Turn off live streaming to Youtube.",
+                "C. Add participants to an organizational unit (OU). Turn on live streaming.",
+                "D. Turn on in-house live streaming. Invite users from affiliated domains."
+            ],
+            a: ["A"],
+            expl: "Trusted domains setting limits participation."
+        },
+        {
+            id: 55,
+            q: "You are configuring email for your company's Google Workspace account. The company wants to prevent certain types of files from being sent or received as email attachments in the simplest and most cost-effective way. What should you do?",
+            options: [
+                "A. Adjust the maximum message size limit to prevent large files from being sent or received.",
+                "B. Enable the Security Sandbox in Gmail to automatically quarantine emails with suspicious attachments.",
+                "C. Scan all incoming and outgoing emails for malicious attachments by using an industry standard third- party email security solution.",
+                "D. Configure an attachment compliance rule in Gmail settings to block specific file types."
+            ],
+            a: ["D"],
+            expl: "Native blocking feature."
+        },
+        {
+            id: 56,
+            q: "Your company wants to minimize distractions and inappropriate content in their Google Chat spaces. You need to give trusted employees the ability to remove messages and ban users from specific Chat spaces. What should you do?",
+            options: [
+                "A. Assign the trusted employees as moderators for the relevant Chat spaces.",
+                "B. Create a data loss prevention (DLP) rule that blocks inappropriate content from being shared",
+                "C. Use the security investigation tool to audit and monitor Chat messages.",
+                "D. Disable all Chat spaces except those specifically approved by management."
+            ],
+            a: ["A"],
+            expl: "Moderators manage space content."
+        },
+        {
+            id: 57,
+            q: "The current data storage limit for the sales organizational unit (OU) at your company is set at 10GB per user. A subset of sales representatives in that OU need 100GB of storage across shared services. You need to increase the storage for only the subset of sales representatives by using the least disruptive approach and the fewest configuration steps. What should you do?",
+            options: [
+                "A. Move the subset of users to a sub-OU, and assign a 100GB storage limit to that sub-OU.",
+                "B. Instruct the subset of users to store their documents in a Shared Drive with a 100GB limit.",
+                "C. Change the storage limit of the sales OU to 100GB.",
+                "D. Create a configuration group, and add the subset of users to that group. Set the group storage limit to 100GB."
+            ],
+            a: ["D"],
+            expl: "Configuration groups allow applying settings to a subset of users."
+        },
+        {
+            id: 58,
+            q: "Your company's security team should be able to investigate unauthorized external file sharing. You need to ensure that the security team can use the security investigation tool and you must follow the principle of least privilege. What should you do?",
+            options: [
+                "A. Grant the super admin role to a delegate from the security team.",
+                "B. Create a pre-built reporting role. Assign the role to the security team alias.",
+                "C. Share the Drive audit log with the security team.",
+                "D. Create a custom admin role with security center privileges. Assign the role to the individual security team members."
+            ],
+            a: ["D"],
+            expl: "Custom role with specific Security Center rights avoids Super Admin risks."
+        },
+        {
+            id: 59,
+            q: "Users at your company are reporting that they are not receiving some emails in their corporate Gmail account. You have checked the Google Workspace Status Dashboard and you found no service disruptions. You need to identify the root cause of the problem and resolve the mail delivery issues. What should you do? (Choose two.)",
+            options: [
+                "A. Use Email Log Search (ELS) to identify specific delivery failures.",
+                "B. Verify whether the organization's Mail Exchange (MX) records are correctly configured.",
+                "C. Check the users' spam folders to determine whether emails are being misdirected.",
+                "D. Investigate the Gmail log events for error messages or unusual patterns.",
+                "E. Check the senders' IP addresses in the inbound mail gateway."
+            ],
+            a: ["A", "B"],
+            expl: "Log Search finds the message; MX confirms the route exists."
+        },
+        {
+            id: 60,
+            q: "You are designing a group structure for your company that will be used to grant access to a specific shared drive. You need this solution to automatically add and remove employees based on their job role. What should you do?",
+            options: [
+                "A. Create a security group. Add all employees with the desired job role. Grant the security group access to the shared drive.",
+                "B. Create a distribution list. Add all employees with the desired job role. Grant the distribution list access to the shared drive.",
+                "C. Create a dynamic group. Set the membership criteria to the desired job role. Grant the dynamic group access to the shared drive.",
+                "D. Create a configuration group. Add users on an exception basis. Grant the configuration group access to the shared drive."
+            ],
+            a: ["C"],
+            expl: "Dynamic groups query user attributes."
+        },
+        {
+            id: 61,
+            q: "An executive at your organization asked you to give their executive administrator access to their Workspace account. You need to ensure that this executive administrator can manage emails in the executive's account. You need to maintain security and privacy of the executive's account. What should you do?",
+            options: [
+                "A. Assist the executive in setting up email forwarding to their executive administrator.",
+                "B. Instruct the executive to share their password with their executive administrator.",
+                "C. Create a Google Group, and add all executive administrators. Enable delegated access to the Group.",
+                "D. Grant delegated access to the executive's Gmail account, and assign access to their executive administrator in Gmail settings."
+            ],
+            a: ["D"],
+            expl: "Delegation is the secure method."
+        },
+        {
+            id: 62,
+            q: "You are migrating your organization's email to Google Workspace. Your organization uses the terramearth.com email domain. You need to configure Google Workspace to receive emails sent to terramearth.com. What should you do?",
+            options: [
+                "A. Add terramearth.com as a primary, secondary, or alias domain in Google Workspace. Update the Mail Exchange (MX) records with your domain registrar to direct mail flow to Google's mail servers.",
+                "B. Establish a Transport Layer Security (TLS) connection between your company's existing mail servers and Google's mail servers",
+                "C. Configure an email address in Google Workspace to capture emails sent to unverified domains, including terramearth.com.",
+                "D. Create a domain alias for terramearth.com in Google Workspace. Configure email forwarding to redirect emails to the new Google Workspace accounts."
+            ],
+            a: ["A"],
+            expl: "Must add domain and point MX records."
+        },
+        {
+            id: 63,
+            q: "Multiple users in your organization are reporting that Calendar invitations sent from a specific department are not being received. You verified that the invitations are being sent and there are no error messages in the sender's logs. You want to troubleshoot the issue. What should you do?",
+            options: [
+                "A. Analyze the message headers of the sent invitations by using the Google Admin Toolbox to identify any delivery issues.",
+                "B. Verify that the senders in the specific department have the necessary permissions to share their calendars externally and send invitations outside of the organization.",
+                "C. Disable and re-enable the Calendar service for the affected users to refresh their connection.",
+                "D. Check the affected users Calendar settings to confirm whether they have accidentally blocked invitations from the specific department."
+            ],
+            a: ["A"],
+            expl: "Headers reveal delivery path issues."
+        },
+        {
+            id: 64,
+            q: "The names and capacities of several conference rooms have been updated. You need to use the most efficient way to update these details. What should you do?",
+            options: [
+                "A. Export the resource list to a CSV file, make the changes, and re-import the updated file.",
+                "B. Edit each resource in the Google Admin console.",
+                "C. Add the modified rooms as new resources. Tell employees not to use old rooms.",
+                "D. Delete the existing resources and recreate the resources with the updated information."
+            ],
+            a: ["A"],
+            expl: "Bulk CSV is best for updates."
+        },
+        {
+            id: 65,
+            q: "Your company has offices in several different countries and is deploying Google Workspace. You're setting up Google Calendar and need to ensure that, when a user is creating a Google Calendar event, rooms are suggested in a nearby office. What should you do?",
+            options: [
+                "A. Assign building ID, floor name, and floor section to define users' work locations based on defined buildings and rooms.",
+                "B. Restrict room sharing to a dynamic group based on user location.",
+                "C. Add your users to Google Groups by location. Add room resources to the corresponding groups.",
+                "D. Add your users to organizational units (OUs) by location. Add room resources to the corresponding OUs."
+            ],
+            a: ["A"],
+            expl: "Structured resources enable proximity suggestions."
+        },
+        {
+            id: 66,
+            q: "You need to grant a specific set of users in your company access to YouTube, and you want to restrict their access to Merchant Center. What should you do?",
+            options: [
+                "A. Create YouTube and Merchant Center as custom web apps. Apply access policies at the Group or organizational unit (OU) level.",
+                "B. Enable access to YouTube at the Group or organizational unit (OU) level for the subset of users. Disable access to Merchant Center.",
+                "C. Enable YouTube for all users in the company. Individually restrict access to Merchant Center for specific Groups or organizational units (OUs).",
+                "D. Contact Google Support and request that they enable YouTube access for the specific set of users and restrict their access to Merchant Center."
+            ],
+            a: ["B"],
+            expl: "By enabling YouTube access at the Group or organizational unit (OU) level, you can target a specific set of users, allowing them to access YouTube. Simultaneously, you can disable access to Merchant Center for those same users."
+        },
+        {
+            id: 67,
+            q: "A user in your organization received a spam email that they reported for further investigation. You need to find out more details and the scope of this incident as quickly as possible. What should you do?",
+            options: [
+                "A. Conduct a search in the security investigation tool to find this email, and identify whether additional users were affected.",
+                "B. Conduct a search to find all emails sent by the sender by using the Gmail API.",
+                "C. Conduct an Email reports search to find this email and all of the email's recipients.",
+                "D. Conduct a Vault search to find this email and identify if additional users were affected."
+            ],
+            a: ["A"],
+            expl: "Investigation Tool is designed for real-time incident scoping and remediation."
+        },
+        {
+            id: 68,
+            q: "Your company wants to start using Google Workspace for email. Your domain is verified through a third-party provider. You need to route the email to Google Workspace. What should you do?",
+            options: [
+                "A. Update your domain's MX records to the Google Workspace MX records provided in the setup instructions.",
+                "B. Change your domain's A record to point to Google's mail servers.",
+                "C. Create a CNAME record that maps your domain to \"gmail.com.\"",
+                "D. Configure a forwarding rule in your current email system to redirect all messages to Gmail."
+            ],
+            a: ["A"],
+            expl: "MX records control mail routing."
+        },
+        {
+            id: 69,
+            q: "You work for a multinational organization. Employees in several office buildings are experiencing issues with Google Voice, including dropped calls and poor call quality. You need to quickly determine whether this is a localized issue or a broader Google Voice service disruption. What should you do?",
+            options: [
+                "A. Use the security investigation tool to search user log events for \"Call failed\", and analyze packet loss data.",
+                "B. Check the Google Workspace Status Dashboard for reported service outages or disruptions.",
+                "C. Verify whether users in the affected buildings have been assigned Google Voice licenses.",
+                "D. Check the Google Workspace Updates blog for announcements about Google Voice issues."
+            ],
+            a: ["B"],
+            expl: "The Dashboard is the first stop to rule out Google-side outages."
+        },
+        {
+            id: 70,
+            q: "You manage Chrome Enterprise browsers for your large organization. You want to ensure that specific extensions are automatically installed on all managed Chrome Enterprise browsers. What should you do?",
+            options: [
+                "A. Force-install the extensions through Chrome browser policies.",
+                "B. Publish the extensions in the Chrome Web Store.",
+                "C. Allowlist the specific Chrome browser extensions.",
+                "D. Configure a script to deploy the extensions upon user login."
+            ],
+            a: ["A"],
+            expl: "Force-install ensures the extension is present and cannot be removed by the user."
+        },
+        {
+            id: 71,
+            q: "You notice an increase in support tickets related to Gmail. Multiple users are reporting that their emails are not loading, and they are receiving error messages. You need to troubleshoot the issue and identify potential causes. What should you do?",
+            options: [
+                "A. Collect the users' browser versions and extensions to identify potential compatibility issues.",
+                "B. Review the users' email forwarding settings to ensure that emails are not being redirected to incorrect addresses.",
+                "C. Gather HAR files from affected users to capture network traffic and analyze request/response details.",
+                "D. Analyze the users' Gmail labels and filters to determine whether incoming emails are being inadvertently blocked."
+            ],
+            a: ["C"],
+            expl: "HAR files are the standard artifact for debugging complex web app loading/network issues."
+        },
+        {
+            id: 72,
+            q: "You are configuring Google Chat for your organization. Using the Adin console, you want to enable employees to view their chat history by default and allow employees to turn off chat history. What should you do?",
+            options: [
+                "A. Set the top-level default conversation history setting to ON and allow users to change their history setting.",
+                "B. Set the space history setting to OFF and chat history to ON.",
+                "C. Set the top-level default conversation history settings to OFF and allow users in each organizational unit (OU) to change their history setting.",
+                "D. Configure Google Vault to retain all Chat messages, and exclude organizational units (OUs) with users who want to turn Chat history off."
+            ],
+            a: ["A"],
+            expl: "Sets the baseline behavior while granting user discretion."
+        },
+        {
+            id: 73,
+            q: "Per regulatory requirements, your company is required to keep the data of employees located in Germany within Europe and the data of employees located in the US within the US. The employees in Germany are in a separate organizational unit (OU) than employees in the US. You need to ensure that where employee data is stored is in compliance with the location regulations. What should you do?",
+            options: [
+                "A. Instruct employees to use Drive for desktop to keep documents on their corporate computers.",
+                "B. Create two Groups. Assign employees into the Germany or US Group based on their location. Use Google Drive trust rules to prevent sharing between the Groups.",
+                "C. Navigate to the Data Regions function in the Admin console. Select the Europe region for employees in Germany, and select the US region for US employees.",
+                "D. Navigate to the Data Regions function in the Admin console. Select \"No preference.\""
+            ],
+            a: ["C"],
+            expl: "Data Regions allow specifying geographic storage locations by OU."
+        },
+        {
+            id: 74,
+            q: "The human resources department notified you of a legal investigation that was started for an employee in the finance department. You need to ensure that this employee's Google Drive data is preserved for at least one year and does not get deleted by the user or by other means. The Google Vault default retention rules for Drive are set for five years. What should you do?",
+            options: [
+                "A. Create a hold in Vault for the employee's Drive.",
+                "B. Place the employee into a separate organizational unit (OU). Create a custom one-year retention rule for this OU.",
+                "C. Change the Vault default retention rule to one year instead of five.",
+                "D. Confirm that the Vault default retention rule is set for five years."
+            ],
+            a: ["A"],
+            expl: "Holds override retention rules. Question implies preservation amidst potential deletion. Hold is safest for investigation."
+        },
+        {
+            id: 75,
+            q: "Your security team is concerned about disgruntled employees downloading large amounts of intellectual property. You need to create an automatic notification if any user downloads more than 500 files from Google Drive within a one-hour period. What should you do?",
+            options: [
+                "A. Configure a Data Loss Prevention (DLP) rule for Drive.",
+                "B. Use the alert center to review Drive audit logs for instances where users download a large number of files.",
+                "C. Create an activity rule in the security investigation tool to monitor Drive download events. Set a threshold to trigger an alert.",
+                "D. Set up an alert within Google Cloud Monitoring to track the number of Drive API calls and trigger a notification when a user makes an excessive number of download requests."
+            ],
+            a: ["C"],
+            expl: "Activity rules can trigger alerts based on log threshold (download count)."
+        },
+        {
+            id: 76,
+            q: "Your company recently installed a free email marketing platform from the Google Workspace Marketplace. The marketing team is unable to access customer contact information or send emails through the platform. You need to identify the cause of the problem. What should you do first?",
+            options: [
+                "A. Use the security investigation tool to review Gmail logs.",
+                "B. Confirm that the \"Manage Third-Party App Access\" setting in the Admin console is enabled.",
+                "C. Check the OAuth scopes that are granted to the email marketing platform and ensure the platform has access to Contacts and Gmail.",
+                "D. Verify that the email marketing platform's subscription is active and up-to-date."
+            ],
+            a: ["C"],
+            expl: "Apps need API scopes granted to access data."
+        },
+        {
+            id: 77,
+            q: "A team of employees in your organization is collaborating on a project with an external organization. Employees of the external organization need access to project documents in your Google Workspace domain, however they don't currently have a Google account. You need to enable secure file sharing while preventing unauthorized access. What should you do?",
+            options: [
+                "A. Enable external sharing for the organizational unit (OU) that is created for the external organization.",
+                "B. Add the external organization's domain to the trusted domain allowlist.",
+                "C. Create and assign user accounts to the external users of your Workspace domain.",
+                "D. Enable visitor sharing for the organizational unit (OU) in your Workspace domain."
+            ],
+            a: ["D"],
+            expl: "Visitor sharing allows PIN-based access for non-Google accounts."
+        },
+        {
+            id: 78,
+            q: "You recently noticed a suspicious trend in your organization's Google Drive usage. Several users have shared sensitive documents outside the organization, potentially violating your company's data security policy. You need to identify the responsible users and the extent of the unauthorized sharing. What should you do?",
+            options: [
+                "A. Create an activity rule in the Security Center to alert you of future external sharing events.",
+                "B. Use the security health page to identify misconfigured sharing settings in Drive.",
+                "C. Review the organization's sharing policies in the Admin console, and update the policies to prevent external sharing.",
+                "D. Use the security investigation tool to analyze Drive logs and identify the users."
+            ],
+            a: ["D"],
+            expl: "Investigation tool allows searching logs for specific events like external sharing."
+        },
+        {
+            id: 79,
+            q: "Your organization wants to ensure that all employees who use Chrome browsers for work adhere to specific security and configuration settings. You need to manage and control the Chrome browsers used within the company while using the least expensive solution. What should you do?",
+            options: [
+                "A. Remotely wipe all employee devices to ensure that they are using the latest Chrome browser version.",
+                "B. Enroll the Chrome browsers in your organization's domain and apply Chrome browser policies.",
+                "C. Use a third-party software deployment solution to manage the Chrome browser.",
+                "D. Disable all extensions on employee Chrome browsers to prevent any potential security risks."
+            ],
+            a: ["B"],
+            expl: "Enrollment in Cloud Management (Chrome Browser Cloud Management) is the cost-effective method to manage browsers centrally."
+        },
+        {
+            id: 80,
+            q: "Your organization has detected a significant rise in unauthorized access to applications from personal devices. This poses a critical security risk and could lead to data loss. To mitigate this risk, you must immediately restrict user access to these applications. What should you do?",
+            options: [
+                "A. Enable data loss prevention rules.",
+                "B. Limit apps access to company-issued devices by using context-aware access.",
+                "C. Configure apps data access to Limited to only allow access to unrestricted services.",
+                "D. Enable multi-factor authentication for application access."
+            ],
+            a: ["B"],
+            expl: "CAA can block access based on device management state."
+        },
+        {
+            id: 81,
+            q: "Your organization has acquired another company that used another email provider. Employees from the newly acquired company need to be able to send and receive emails from two domain names-your organization’s domain name and their former company’s domain name. You need to identify the best approach. What should you do?",
+            options: [
+                "A. Add the acquired company’s domain name as a Secondary Domain, and create user accounts with the new domain name.",
+                "B. Add the acquired company's domain name as an alias domain.",
+                "C. Change the MX records of the old domain to point to the new domain.",
+                "D. Create a mail routing rule in the new domain to route messages addressed to the old domain."
+            ],
+            a: ["B"],
+            expl: "If they just need to receive/send as the old domain on their new accounts, an Alias domain is simplest."
+        },
+        {
+            id: 82,
+            q: "You work for a global organization that has offices in the United States and the European Union (EU). There is an organizational unit (OU) for employees in the United States and a separate OU for employees in the EU. Your company regulations need you to ensure that your users' data is located in the same region as their physical office. What should you do?",
+            options: [
+                "A. Set the OU data location to No preference.",
+                "B. Turn on advanced settings and select Enable features that may process data across multiple regions.",
+                "C. Turn on advanced settings and select Disable features that may process data across multiple regions.",
+                "D. Set a data region policy for each region’s OU."
+            ],
+            a: ["D"],
+            expl: "Data Regions are applied per Organizational Unit."
+        },
+        {
+            id: 83,
+            q: "Your organization has business operations worldwide in the Americas, Europe, and Asia Pacific regions. Your data compliance officer told you that it is preferable that the data is stored in a location within the region where the user resides. You need to configure the Data Regions feature in the Admin console. What should you do?",
+            options: [
+                "A. Create groups for the three regions. Add the users to their respective group. Select ‘United States’ for the Americas group, ‘Europe’ for the Europe group, and ‘Asia Pacific’ for the Asia Pacific group.",
+                "B. Select ‘United States’ for the Americas OU, ‘Europe’ for the Europe OU, and ‘No Preference’ for the Asia Pacific OU.",
+                "C. Select ‘United States’ for the parent OU.",
+                "D. Select ‘United States’ for the Americas OU, ‘Europe’ for the Europe OU, and ‘Asia Pacific’ for the Asia Pacific OU."
+            ],
+            a: ["D"],
+            expl: "Map OUs to their respective Data Regions."
+        },
+        {
+            id: 84,
+            q: "Your company wants to improve the security of online meetings. You need to prevent unauthorized access to Google Meet meetings and protect sensitive information that is being shared during these meetings. What should you do?",
+            options: [
+                "A. Enable and configure the Meet safety settings for the Google Workspace environment.",
+                "B. Enable Meet Gemini settings for additional security.",
+                "C. Use the Meet audit log to set up alerts when an external participant has joined a meeting.",
+                "D. Instruct employees to only use the dial-in phone numbers."
+            ],
+            a: ["A"],
+            expl: "Safety settings control entry (Quick access, etc)."
+        },
+        {
+            id: 85,
+            q: "Your organization’s IT department requires a dedicated auditor to oversee and verify activities within Google Vault. You need to give the auditor comprehensive read-only access to Vault retention policies and matters, but the auditor should not be able to make any changes or perform any actions. What should you do?",
+            options: [
+                "A. Assign the super admin role to the auditor and remove all privileges except “View All Matters.”",
+                "B. Create a custom role with “View” privileges for Retention Policies and All Matters. Assign the role to the auditor.",
+                "C. Create a custom role with the “View All Matters” privilege and assign the role to the auditor.",
+                "D. Create a custom role with the “Manage Matters” privilege and assign the role to the auditor. Ensure the auditor is not assigned to any specific matters."
+            ],
+            a: ["B"],
+            expl: "Custom role with specific View privileges."
+        },
+        {
+            id: 86,
+            q: "Your organization wants to launch a bring-your-own-device (BYOD) program to allow users to access corporate data on their personal devices in a secure way. You need to ensure that if a user’s personal device is lost or stolen, an unauthorized user is unable to access corporate data, including data stored locally on the device. What should you do?",
+            options: [
+                "A. Enable advanced mobile management for all users in your organization participating in the BYOD program.",
+                "B. Allow only users who have devices with full device encryption to join the BYOD program.",
+                "C. Deploy device certificates for all users participating in the BYOD program.",
+                "D. Enable basic mobile management for users in your organization participating in the BYOD program, and require the users to complete an updated security training program."
+            ],
+            a: ["A"],
+            expl: "Advanced management is required to wipe the work profile/device thoroughly."
+        },
+        {
+            id: 87,
+            q: "An employee at your company reported to you that they were able to access a label in Google Drive that is used to mark confidential information. This unintended access poses a significant security risk. You need to immediately restrict access to this label and prevent future misuse. What should you do?",
+            options: [
+                "A. Set the label permissions to Restricted access.",
+                "B. Set the label permissions to can apply labels and set values.",
+                "C. Disable the label for Drive.",
+                "D. Create and apply a policy that restricts sharing access for files associated with this label in Drive."
+            ],
+            a: ["A"],
+            expl: "Labels have their own permission controls."
+        },
+        {
+            id: 88,
+            q: "During a recent Google Meet video conference, several employees reported that they could not hear the presenters. The presenters confirmed that their laptops’ microphones were working. The affected employees were all using company-issued laptops. You need to quickly diagnose the source of the issue. What should you do first?",
+            options: [
+                "A. Verify that the audio drivers on the affected laptops are up-to-date and functioning correctly.",
+                "B. Check the Admin console to determine whether there are recent Meet-related notifications or alerts.",
+                "C. Check if Context-Aware access rules were set to prevent Meet access from the user’s network location.",
+                "D. Use the Meet quality tool for each affected user to analyze their microphone settings and configurations during the meeting."
+            ],
+            a: ["D"],
+            expl: "Quality Tool shows bitrates/packet loss/device status."
+        }
     ];
 
     // --- GAME STATE ---
@@ -338,6 +1315,7 @@
     let currentIndex = 0;
     let score = 0;
     let isAnswered = false;
+    let currentSelection = []; // Used for multi-select
 
     // --- DOM ---
     const ui = {
@@ -358,7 +1336,14 @@
     };
 
     function shuffle(array) {
-        return array.sort(() => Math.random() - 0.5);
+        let currentIndex = array.length, randomIndex;
+        while (currentIndex != 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+        }
+        return array;
     }
 
     function startQuiz() {
@@ -373,6 +1358,7 @@
 
     function loadQuestion() {
         isAnswered = false;
+        currentSelection = [];
         const q = shuffledDeck[currentIndex];
         const total = shuffledDeck.length;
 
@@ -381,7 +1367,7 @@
         ui.qId.innerText = `ID: ${q.id}`;
         ui.qText.innerText = q.q;
         ui.feedback.style.display = 'none';
-        ui.feedback.className = 'feedback'; // reset classes
+        ui.feedback.className = 'feedback'; 
         ui.nextBtn.style.display = 'none';
         ui.options.innerHTML = '';
 
@@ -393,35 +1379,44 @@
         q.options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
-            btn.innerText = opt;
-            btn.onclick = () => handleAnswer(btn, opt, q);
+            
+            // Extract letter for logic (A, B, C, D)
+            const letter = opt.trim().charAt(0).toUpperCase();
+            
+            const letterSpan = document.createElement('span');
+            letterSpan.className = 'option-letter';
+            letterSpan.innerText = letter;
+
+            const textSpan = document.createElement('span');
+            textSpan.innerText = opt.substring(2).trim(); // Remove "A. "
+
+            btn.appendChild(letterSpan);
+            btn.appendChild(textSpan);
+            
+            btn.onclick = () => handleAnswer(btn, letter, q);
             ui.options.appendChild(btn);
         });
-
-        // Current Selection Tracker (for multi)
-        ui.currentSelection = [];
     }
 
-    function handleAnswer(btn, text, q) {
+    function handleAnswer(btn, letter, q) {
         if (isAnswered) return;
 
         const isMulti = q.a.length > 1;
-        const letter = text.trim().charAt(0).toUpperCase();
 
         if (isMulti) {
             // Toggle selection
-            if (ui.currentSelection.includes(letter)) {
-                ui.currentSelection = ui.currentSelection.filter(l => l !== letter);
+            if (currentSelection.includes(letter)) {
+                currentSelection = currentSelection.filter(l => l !== letter);
                 btn.classList.remove('selected');
             } else {
-                if (ui.currentSelection.length < q.a.length) {
-                    ui.currentSelection.push(letter);
+                if (currentSelection.length < q.a.length) {
+                    currentSelection.push(letter);
                     btn.classList.add('selected');
                 }
             }
             // Check if ready
-            if (ui.currentSelection.length === q.a.length) {
-                checkResult(ui.currentSelection, q);
+            if (currentSelection.length === q.a.length) {
+                checkResult(currentSelection, q);
             }
         } else {
             // Single choice
@@ -432,7 +1427,7 @@
     function checkResult(userAnswers, q) {
         isAnswered = true;
         
-        // Sort for comparison
+        // Normalize for comparison
         const sortedUser = [...userAnswers].sort().join('');
         const sortedCorrect = [...q.a].sort().join('');
         const isCorrect = sortedUser === sortedCorrect;
@@ -443,6 +1438,9 @@
             btn.disabled = true;
             const btnLetter = btn.innerText.trim().charAt(0).toUpperCase();
             
+            // Remove temp selection style
+            btn.classList.remove('selected');
+
             // Highlight Correct
             if (q.a.includes(btnLetter)) {
                 btn.classList.add('correct');
@@ -467,12 +1465,18 @@
         ui.fbExpl.innerText = q.expl || "No explanation provided.";
         ui.feedback.style.display = 'block';
         ui.nextBtn.style.display = 'block';
+        
+        // Auto-scroll
+        setTimeout(() => {
+             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 100);
     }
 
     function nextQuestion() {
         if (currentIndex < shuffledDeck.length - 1) {
             currentIndex++;
             loadQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else {
             endQuiz();
         }
