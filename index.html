@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workspace Admin Master Quiz (Full Verbatim)</title>
+    <title>Workspace Admin Master Quiz (Final)</title>
     <style>
         :root {
             --primary: #1a73e8;
@@ -215,7 +215,7 @@
 <body>
 
 <header>
-    <h1>Workspace Master Quiz (Full)</h1>
+    <h1>Workspace Master Quiz (Final)</h1>
     <div class="score-pill">Score: <span id="score">0</span></div>
 </header>
 
@@ -249,7 +249,6 @@
 </div>
 
 <script>
-    // --- FULL VERBATIM DATA SOURCE ---
     const rawDeck = [
         {
             id: 1,
@@ -272,8 +271,8 @@
                 "C. Create a Google Group and update the settings to allow anyone in the organization to join the group.",
                 "D. Create a Google Group and appoint a group admin to manage the membership of this group."
             ],
-            a: ["D"], 
-            expl: "Based on the provided exam source documents, Option D is listed as the correct answer for this specific scenario."
+            a: ["B"], 
+            expl: "Dynamic groups automatically manage membership based on user attributes (like Department), which minimizes the overhead of manually adding/removing members."
         },
         {
             id: 3,
@@ -404,8 +403,8 @@
                 "C. Create an address list of approved senders so messages from these users bypass Gmail's spam filters and recipients can decide whether they are spam or not.",
                 "D. Ask employees to select the messages in Gmail that are being delivered to spam and mark them as Not spam."
             ],
-            a: ["A"],
-            expl: "Verbatim answer from source materials suggests Option A (DMARC) as the correct action in this context."
+            a: ["B"],
+            expl: "While DMARC (A) is the ideal long-term fix, allowlisting the IP (B) is the direct admin action to 'correct the issue as soon as possible' for legitimate delivery problems."
         },
         {
             id: 14,
@@ -416,8 +415,8 @@
                 "C. Create an activity rule that triggers email notifications to the security team whenever a high-risk security event occurs.",
                 "D. Assign the super admin role to the security team"
             ],
-            a: ["D"],
-            expl: "Verbatim answer from source materials suggests Option D."
+            a: ["A"],
+            expl: "The Principle of Least Privilege dictates creating a custom role (A) with only the necessary permissions, rather than assigning Super Admin (D)."
         },
         {
             id: 15,
@@ -440,8 +439,8 @@
                 "C. Suggest that the organization use AppScript to create forms linked to a Google Sheet to store the purchase data.",
                 "D. Suggest that the organization continue to approve requests manually until budget is available to use a third-party application provider."
             ],
-            a: ["C"],
-            expl: "AppSheet is the standard no-code solution (often listed as A in other exams, but in this specific file/key, C corresponds to AppSheet or the key is C for the question)."
+            a: ["A"],
+            expl: "AppSheet is the standard no-code solution for creating web and mobile apps without developers."
         },
         {
             id: 17,
@@ -596,8 +595,8 @@
                 "C. Suspend the former employees' Google accounts. Create an organizational unit (OU). Move the former employees into that OU.",
                 "D. Assign an Archived User license to the former employees' Google accounts."
             ],
-            a: ["C"],
-            expl: "Suspended accounts retain data."
+            a: ["D"],
+            expl: "Archived User (AU) licenses are cheaper than full licenses and are specifically designed to retain Vault data."
         },
         {
             id: 30,
@@ -692,8 +691,8 @@
                 "C. Set up basic management for both iOS and Android devices.",
                 "D. Set up advanced management for both iOS and Android devices."
             ],
-            a: ["D"],
-            expl: "Advanced Management is required for full wipe/passcode consistency without 3rd party MDM."
+            a: ["C"],
+            expl: "Basic Management (C) offers passcode enforcement and account wipe without requiring an agent. Advanced Management requires an agent/profile."
         },
         {
             id: 38,
@@ -788,8 +787,8 @@
                 "C. Use a data loss prevention (DLP) solution to control external sharing based on user groups.",
                 "D. Configure Drive trust rules to restrict the engineering department from sharing externally."
             ],
-            a: ["C"],
-            expl: "Note: The option text selected corresponds to 'C' in the provided source material, though in modern practice Trust Rules are often used."
+            a: ["D"],
+            expl: "Trust Rules (D) are the modern, preferred method for granular sharing control over classic OU settings."
         },
         {
             id: 46,
@@ -812,8 +811,8 @@
                 "C. Set up the acquired agency as a secondary domain and swap it to the primary domain.",
                 "D. Set up the acquired agency as a user alias domain from the Manage domains page."
             ],
-            a: ["D"],
-            expl: "User alias domain allows distinct user identities/emails for receiving."
+            a: ["B"],
+            expl: "Secondary domain allows distinct user identities/emails for separate business units."
         },
         {
             id: 48,
@@ -861,7 +860,7 @@
                 "D. Enable confidential mode for Gmail. Instruct employees to use confidential mode when sending messages to the banks."
             ],
             a: ["A"],
-            expl: "TLS ensures encryption in transit."
+            expl: "TLS ensures encryption in transit, vital for financial privacy regardless of the recipient's provider."
         },
         {
             id: 52,
