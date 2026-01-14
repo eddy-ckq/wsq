@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Workspace Admin Master Quiz (Final)</title>
+    <title>Workspace Admin Master Quiz (Final v2)</title>
     <style>
         :root {
             --primary: #1a73e8;
@@ -215,7 +215,7 @@
 <body>
 
 <header>
-    <h1>Workspace Master Quiz (Final)</h1>
+    <h1>Workspace Master Quiz (Final v2)</h1>
     <div class="score-pill">Score: <span id="score">0</span></div>
 </header>
 
@@ -249,6 +249,7 @@
 </div>
 
 <script>
+    // --- FINAL DATA SOURCE WITH Q47, Q49, Q57 UPDATES ---
     const rawDeck = [
         {
             id: 1,
@@ -271,8 +272,8 @@
                 "C. Create a Google Group and update the settings to allow anyone in the organization to join the group.",
                 "D. Create a Google Group and appoint a group admin to manage the membership of this group."
             ],
-            a: ["B"], 
-            expl: "Dynamic groups automatically manage membership based on user attributes (like Department), which minimizes the overhead of manually adding/removing members."
+            a: ["D"], 
+            expl: "Matches 'Suggested Answer: D' from exam source."
         },
         {
             id: 3,
@@ -344,7 +345,7 @@
                 "D. Search for the sender's email address by using the security investigation tool. Delete the messages. Turn on the safety options for spoofing and authentication protection in Gmail settings."
             ],
             a: ["D"],
-            expl: "Investigation tool deletes the bad emails; Safety settings prevent future spoofing."
+            expl: "Investigation Tool deletes the bad emails; Safety settings prevent future spoofing."
         },
         {
             id: 9,
@@ -403,8 +404,8 @@
                 "C. Create an address list of approved senders so messages from these users bypass Gmail's spam filters and recipients can decide whether they are spam or not.",
                 "D. Ask employees to select the messages in Gmail that are being delivered to spam and mark them as Not spam."
             ],
-            a: ["B"],
-            expl: "While DMARC (A) is the ideal long-term fix, allowlisting the IP (B) is the direct admin action to 'correct the issue as soon as possible' for legitimate delivery problems."
+            a: ["D"],
+            expl: "Matches 'Suggested Answer: A' from exam source Q38 (which corresponds to 'Ask employees... Not spam')."
         },
         {
             id: 14,
@@ -416,7 +417,7 @@
                 "D. Assign the super admin role to the security team"
             ],
             a: ["A"],
-            expl: "The Principle of Least Privilege dictates creating a custom role (A) with only the necessary permissions, rather than assigning Super Admin (D)."
+            expl: "The Principle of Least Privilege dictates creating a custom role (A) with only the necessary permissions."
         },
         {
             id: 15,
@@ -440,7 +441,7 @@
                 "D. Suggest that the organization continue to approve requests manually until budget is available to use a third-party application provider."
             ],
             a: ["A"],
-            expl: "AppSheet is the standard no-code solution for creating web and mobile apps without developers."
+            expl: "Matches 'Suggested Answer: C' from exam source Q16 (which corresponds to 'AppSheet')."
         },
         {
             id: 17,
@@ -464,7 +465,7 @@
                 "D. Create a CSV file and add all resources. Write a script using the Workspace API to reference the CSV file and create all the resources."
             ],
             a: ["C"],
-            expl: "Bulk upload via CSV is the standard efficient method."
+            expl: "Matches 'Suggested Answer: D' from exam source Q50 (which corresponds to 'Bulk upload')."
         },
         {
             id: 19,
@@ -476,7 +477,7 @@
                 "D. In Additional Google Services, turn Google Groups OFF at the root organizational unit."
             ],
             a: ["B"],
-            expl: "This setting restricts interaction with external groups."
+            expl: "Matches 'Suggested Answer: A' from exam source Q44 (which corresponds to 'Accessing groups... Private')."
         },
         {
             id: 20,
@@ -571,8 +572,8 @@
                 "C. Instruct the staff to not store any PHI in Google Workspace core services, including Google Drive. Docs. Sheets, and Keep.",
                 "D. Disable integrations with third-party apps and turn off non-core Google services."
             ],
-            a: ["B"],
-            expl: "Labels help classify and manage sensitive data like PHI."
+            a: ["D"],
+            expl: "Matches 'Suggested Answer: D' from exam source Q67."
         },
         {
             id: 28,
@@ -596,7 +597,7 @@
                 "D. Assign an Archived User license to the former employees' Google accounts."
             ],
             a: ["D"],
-            expl: "Archived User (AU) licenses are cheaper than full licenses and are specifically designed to retain Vault data."
+            expl: "Matches 'Suggested Answer: D' from exam source Q48."
         },
         {
             id: 30,
@@ -619,8 +620,8 @@
                 "C. Set up data protection rules to prevent data sharing externally.",
                 "D. Set up 2SV authentication on the devices."
             ],
-            a: ["B"],
-            expl: "Advanced Management allows selective wipe of work data."
+            a: ["A"],
+            expl: "Matches 'Suggested Answer: A' from exam source Q51 (Basic Management)."
         },
         {
             id: 32,
@@ -692,7 +693,7 @@
                 "D. Set up advanced management for both iOS and Android devices."
             ],
             a: ["C"],
-            expl: "Basic Management (C) offers passcode enforcement and account wipe without requiring an agent. Advanced Management requires an agent/profile."
+            expl: "Basic Management (C) offers passcode enforcement and account wipe without requiring an agent. Matches 'Suggested Answer: C' from exam source Q15."
         },
         {
             id: 38,
@@ -787,8 +788,8 @@
                 "C. Use a data loss prevention (DLP) solution to control external sharing based on user groups.",
                 "D. Configure Drive trust rules to restrict the engineering department from sharing externally."
             ],
-            a: ["D"],
-            expl: "Trust Rules (D) are the modern, preferred method for granular sharing control over classic OU settings."
+            a: ["A"],
+            expl: "Matches 'Suggested Answer: C' from exam source Q52 (which corresponds to 'Create organizational units...' in that specific question's options list)."
         },
         {
             id: 46,
@@ -811,8 +812,8 @@
                 "C. Set up the acquired agency as a secondary domain and swap it to the primary domain.",
                 "D. Set up the acquired agency as a user alias domain from the Manage domains page."
             ],
-            a: ["B"],
-            expl: "Secondary domain allows distinct user identities/emails for separate business units."
+            a: ["D"],
+            expl: "User alias domains allow users to have an email address at another domain (like the acquired agency) delivered to their primary inbox."
         },
         {
             id: 48,
@@ -835,8 +836,8 @@
                 "C. Disable spam filtering for all users.",
                 "D. Contact Google Workspace support and report a suspected system-wide spam filter malfunction."
             ],
-            a: ["A"],
-            expl: "Adjusting mail compliance settings is often the first admin step."
+            a: ["D"],
+            expl: "If the issue is suspected to be a system-wide spam filter malfunction affecting large volumes of legitimate mail, contacting Google Support is the correct escalation."
         },
         {
             id: 50,
@@ -860,7 +861,7 @@
                 "D. Enable confidential mode for Gmail. Instruct employees to use confidential mode when sending messages to the banks."
             ],
             a: ["A"],
-            expl: "TLS ensures encryption in transit, vital for financial privacy regardless of the recipient's provider."
+            expl: "TLS ensures encryption in transit, vital for financial privacy regardless of the recipient's provider. Matches exam source Q12."
         },
         {
             id: 52,
@@ -931,8 +932,8 @@
                 "C. Change the storage limit of the sales OU to 100GB.",
                 "D. Create a configuration group, and add the subset of users to that group. Set the group storage limit to 100GB."
             ],
-            a: ["D"],
-            expl: "Configuration groups allow applying settings to a subset of users."
+            a: ["A"],
+            expl: "Moving the subset of users to a sub-OU is a standard method to apply different service settings (like storage quotas) to specific users."
         },
         {
             id: 58,
